@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arnold Cat Map</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-logo">Arnold<span>CatMap</span></div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleNav()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <button class="nav-tab active"        onclick="showPage('animation',  this)">Animation</button>
+    <button class="nav-tab" onclick="showPage('iterations', this)">All Iterations</button>
+    <button class="nav-tab"        onclick="showPage('hta',        this)">Step-by-Step</button>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 1 — ANIMATION
+═══════════════════════════════════════════════════════════ -->
+<div id="page-animation" class="page active">
+  <div class="hero">
+    <div class="hero-eyebrow">Animated Chaos</div>
+    <h1><em>Animate</em> the Cat Map</h1>
+    <p class="hero-sub">
+      Enter pixel size, upload an image, and choose a matrix with det = +/-1. Then watch the chaos unfold! 
+    </p>
+  </div>
+
+  <div class="wrap">
+    <!-- AFTER -->
+<div class="anim-layout">
+
+  <!-- Left: upload panel -->
+  <div class="anim-sidebar">
+    <div class="panel">
+      <div class="panel-head"><span class="dot"></span>Image</div>
+      <div class="sidebar-body">
+        <div>
+          <label class="field-label">Pixel Size</label>
+          <input type="number" id="anim-size" value="16" min="2" max="501"
+            style="width:80px;" onchange="animOnSizeChange()">
+        </div>
+        <label class="upload-box" id="anim-upload-box" for="anim-file">
+  <span class="up-icon" id="anim-upload-icon">📂</span>
+  <div class="up-lbl" id="anim-upload-lbl">Upload image</div>
+  <p id="anim-upload-sub">PNG / JPG / GIF</p>
+  <input type="file" id="anim-file" accept="image/*" onchange="animOnUpload(this)">
+</label>
+      
+      </div>
+      
+    </div>
+      <div id="anim-period-info" class="period-badge">
+          Period: <strong id="anim-period-val" style="color:var(--accent3)">?</strong> iterations
+        </div>
+  </div>
+
+  <!-- Centre: canvas + progress bar -->
+  <div>
+    <div class="canvas-wrap">
+<canvas id="anim-canvas" width="16" height="16"
+  role="img"
+  aria-label="Arnold Cat Map canvas"
+  aria-describedby="anim-canvas-desc">
+</canvas>
+<p id="anim-canvas-desc" class="sr-only" aria-live="polite">
+  Iteration 0
+</p>      <div class="canvas-badge">Iteration: <span class="n" id="anim-n">0</span></div>
+<button class="canvas-download" onclick="animSaveFrame()" aria-label="Save current frame as PNG">
+<i class="fa-solid fa-file-arrow-down"></i> </button>    </div>
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill" id="anim-progress"></div>
+      </div>
+      <div class="progress-labels">
+        <span>n = 0</span>
+        <span id="anim-period-lbl">period = ?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: matrix + playback panels -->
+  <div class="anim-sidebar">
+    <div class="panel">
+      <div class="panel-head"><span class="dot dot-purple"></span>Playback</div>
+      <div class="sidebar-body">
+       <div class="speed-stepper">
+        <label class="field-label" style="font-size:1rem">Timestep: </label>
+
+  <button class="speed-btn" onclick="changeTimestep(-50)" aria-label="Decrease timestep">−</button>
+<span id="speed-lbl">300ms</span>
+<button class="speed-btn" onclick="changeTimestep(50)"  aria-label="Increase timestep">+</button>
+</div>
+        <div class="btn-row">
+          <button class="btn btn-step"  aria-label="Step backward one iteration" onclick="animStep(-1)">← Back</button>
+          <button class="btn btn-step"  aria-label="Step forward one iteration" onclick="animStep(1)">Forward →</button>
+        </div>
+        <button class="btn btn-cyan" id="anim-play-btn"
+          onclick="animToggle()" style="width:100%">▶ Animate</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><span class="dot dot-red"></span>Matrix</div>
+      <div class="sidebar-body">
+        <div class="matrix-grid">
+          <div class="matrix-cell">
+            <label class="field-label" style="font-size:1rem">a₁₁</label>
+            <input type="number" id="aa11" value="1" min="0" onChange="animOnMatrixChange()">
+          </div>
+          <div class="matrix-cell">
+            <label class="field-label" style="font-size:1rem">a₁₂</label>
+            <input type="number" id="aa12" value="1" min="0" onChange="animOnMatrixChange()">
+          </div>
+          <div class="matrix-cell">
+            <label class="field-label" style="font-size:1rem">a₂₁</label>
+            <input type="number" id="aa21" value="1" min="0" onChange="animOnMatrixChange()">
+          </div>
+          <div class="matrix-cell">
+            <label class="field-label" style="font-size:1rem">a₂₂</label>
+            <input type="number" id="aa22" value="0" min="0" onChange="animOnMatrixChange()">
+          </div>
+        </div>
+        <button class="btn btn-ghost" onclick="animReset()" aria-label="Reset to original image" style="width:100%">↺ Reset</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+  </div>
+  <p>
+  Step forward and backward through iterations, or let it run automatically.
+      Every image eventually returns to its original state — the number of steps is the <em>period</em>.
+</p>
+</div>
+
+
+
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 2 — ALL ITERATIONS
+═══════════════════════════════════════════════════════════ -->
+<div id="page-iterations" class="page">
+  <div class="hero">
+    <div class="hero-eyebrow">Discrete Dynamical System</div>
+    <h1>See<br><em>All Iterations</em></h1>
+    <p class="hero-sub">
+      It's tough to just click through or let it animate — so here every iteration
+      is laid out at once. Does it always come back? And does it always come back
+      after the same number of steps?
+    </p>
+    <div class="formula-pill">
+      (x′, y′) = ( a₁₁x + a₁₂y , a₂₁x + a₂₂y ) mod N
+      <span>det = 1</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- Controls bar -->
+    <div class="iter-controls">
+
+      <div class="iter-cg" style="min-width:148px;">
+        <label class="upload-box" id="anim-upload-box" for="anim-file">
+  <span class="up-icon" id="anim-upload-icon">📂</span>
+  <div class="up-lbl" id="anim-upload-lbl">Upload image</div>
+  <p id="anim-upload-sub">PNG / JPG / GIF</p>
+  <input type="file" id="anim-file" accept="image/*" onchange="animOnUpload(this)">
+</label>
+      </div>
+
+      <div class="iter-cg">
+        <label class="field-label">Image size</label>
+        <input type="number" id="iter-size" value="16" min="2" max="500"
+          style="width:80px;" onchange="animOnSizeChange()">
+      </div>
+
+      <div class="iter-cg">
+        <label class="field-label">Matrix</label>
+        <div class="matrix-grid">
+          <div class="matrix-cell">
+            <label class="field-label">a₁₁</label>
+            <input type="number" id="ia11" value="1" min="0" style="width:56px;">
+          </div>
+          <div class="matrix-cell">
+            <label class="field-label">a₁₂</label>
+            <input type="number" id="ia12" value="1" min="0" style="width:56px;">
+          </div>
+          <div class="matrix-cell">
+            <label class="field-label">a₂₁</label>
+            <input type="number" id="ia21" value="1" min="0" style="width:56px;">
+          </div>
+          <div class="matrix-cell">
+            <label class="field-label">a₂₂</label>
+            <input type="number" id="ia22" value="0" min="0" style="width:56px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="iter-cg">
+        <label class="field-label">Iterations</label>
+          <input type="number" id="iter-slider" value="31" min="1" max="500" style="width:80px;">
+      </div>
+      <div class="iter-cg">
+        <label class="field-label">&nbsp;</label>
+        <button class="btn btn-red" onclick="generateAllIterations()">▶ Show All</button>
+      </div>
+
+    </div>
+
+    <!-- Period detection banner -->
+    <div id="iter-period-row" style="display:none; margin-bottom:0.75rem;">
+      <div class="period-badge">
+        🔁 Period detected — image returns to original at iteration
+        <strong id="iter-period-n" style="color:var(--accent3)">?</strong>
+      </div>
+    </div>
+
+    <!-- Iteration cards -->
+    <div class="iterations-grid" id="iterationsGrid">
+      <div class="empty-state">
+<span class="big" aria-hidden="true">🐱</span>
+<span class="up-icon" id="anim-upload-icon" aria-hidden="true">📂</span>        Click <strong>Show All</strong> to generate iterations.<br>
+        Upload your own image or use the built-in cat.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 3 — STEP-BY-STEP (HTA)
+═══════════════════════════════════════════════════════════ -->
+<div id="page-hta" class="page">
+  <div class="hero">
+    <div class="hero-eyebrow">Linear Map → Modulo</div>
+    <h1>Under<br>the <em>Hood</em></h1>
+    <p class="hero-sub">
+      The matrix has one eigenvalue &gt; 1 and one &lt; 1 in absolute value — it stretches
+      in one direction and compresses in the other. The modulo folds everything back into
+      the starting square. Watch the 10 × 10 coloured grid get scrambled step by step.
+    </p>
+    <div class="formula-pill">
+      A = [[1, 1], [1, 0]] &nbsp;·&nbsp; (x, y)ᵀ &nbsp;mod 10
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="hta-info-bar">
+      <span>A = <span class="mono">[ [1, 1], [1, 0] ]</span></span>
+      <span>N = <span class="mono">10</span></span>
+      <span>Grid = <span class="mono">10 × 10 coloured squares</span></span>
+    </div>
+
+    <div class="hta-iter-display">
+      Iteration: <span id="hta-count">0</span>
+    </div>
+
+    <div class="hta-canvases">
+      <div class="hta-col" id="hta-col-before">
+        <div class="lbl">Current State</div>
+        <canvas id="hta-before" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col" id="hta-col-linear" style="opacity:0.25;">
+        <div class="lbl">Linear Map (before mod)</div>
+        <canvas id="hta-linear" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col" id="hta-col-after" style="opacity:0.25;">
+        <div class="lbl">After Mod N</div>
+        <canvas id="hta-after" width="280" height="280"></canvas>
+      </div>
+    </div>
+
+    <div class="hta-actions">
+      <button class="btn btn-red"   onclick="htaApply()">Apply Transform →</button>
+      <button class="btn btn-ghost" onclick="htaReset()">↺ Reset</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Scripts — order matters: shared utilities first, then page modules, then nav -->
+<script src="js/shared.js"></script>
+<script src="js/iterations.js"></script>
+<script src="js/animation.js"></script>
+<script src="js/hta.js"></script>
+<script src="js/nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initAnim();
+  });
+</script>
+
+</body>
+</html>
