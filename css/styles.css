@@ -6,10 +6,10 @@
   --surface2: #d0f0f0;
   --border: #a8dede;
   --accent: #c05a38; /* terracotta — cat's fur */
-  --accent2: #2a8f8f; /* teal — darkened for contrast */
+  --accent2: #2a8f8f;
   --accent3: #e8906a; /* warm orange — cat's face */
   --text: #2a1f14;
-  --muted: #4f7a7a; /* darkened for contrast */
+  --muted: #3d6060;
   --grid-line: rgba(59, 191, 191, 0.1);
 }
 
@@ -241,7 +241,7 @@ h1 em {
 
 .hero-sub {
   color: var(--muted);
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 1;
   max-width: 100%;
 }
@@ -841,7 +841,108 @@ select option {
 }
 
 .input-error {
-  font-size: 0.62rem;
+  font-size: 1rem;
   color: var(--accent);
   margin-top: 0.25rem;
+}
+
+.about-section {
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.about-section h2 {
+  font-family: "Cormorant", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.about-section p {
+  color: var(--muted);
+  font-size: 1.5rem;
+  line-height: 1.9;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+.about-section em {
+  color: var(--accent2);
+  font-style: italic;
+}
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+
+.about-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.about-card p {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.about-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.about-links a {
+  color: var(--accent2);
+  font-size: 1.5rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.18s;
+}
+
+.about-links a:hover {
+  border-bottom-color: var(--accent2);
+}
+
+.about-steps {
+  margin: 1.2rem 0 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.about-steps li {
+  color: var(--muted);
+  font-size: 1.5rem;
+  line-height: 1.9;
+  padding-left: 0.4rem;
+}
+
+.about-steps li::marker {
+  color: var(--accent); /* terracotta #c05a38 — ~4.8:1 on --bg */
+  font-family: "Cormorant", serif;
+  font-size: 1rem;
+  font-weight: 600;
 }

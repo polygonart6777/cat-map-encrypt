@@ -31,6 +31,7 @@
         </button>
         <!-- <button class="nav-tab" onclick="showPage('iterations', this)">All Iterations</button> -->
         <!-- <button class="nav-tab"        onclick="showPage('hta',        this)">Step-by-Step</button> -->
+        <button class="nav-tab" onclick="showPage('about', this)">About</button>
       </div>
     </nav>
 
@@ -41,8 +42,8 @@
       <div class="hero">
         <h1><em>Animate</em> the Cat Map</h1>
         <p class="hero-sub">
-          Enter pixel size, upload an image, and choose a matrix with det =
-          +/-1. Then watch the chaos unfold!
+          Enter pixel size, upload an image, and choose a matrix to watch the
+          encryption process evolve.
         </p>
       </div>
 
@@ -347,7 +348,7 @@
     <p class="hero-sub">
       The matrix has one eigenvalue &gt; 1 and one &lt; 1 in absolute value — it stretches
       in one direction and compresses in the other. The modulo folds everything back into
-      the starting square. Watch the 10 × 10 coloured grid get scrambled step by step.
+      the starting square. Watch the 10 × 10 colored grid get scrambled step by step.
     </p>
     <div class="formula-pill">
       A = [[1, 1], [1, 0]] &nbsp;·&nbsp; (x, y)ᵀ &nbsp;mod 10
@@ -359,7 +360,7 @@
     <div class="hta-info-bar">
       <span>A = <span class="mono">[ [1, 1], [1, 0] ]</span></span>
       <span>N = <span class="mono">10</span></span>
-      <span>Grid = <span class="mono">10 × 10 coloured squares</span></span>
+      <span>Grid = <span class="mono">10 × 10 colored squares</span></span>
     </div>
 
     <div class="hta-iter-display">
@@ -388,6 +389,218 @@
 
   </div>
 </div> -->
+
+    <div id="page-about" class="page">
+      <div class="hero">
+        <h1>About the<em> Cat Map</em></h1>
+        <p class="hero-sub">
+          The Arnold Cat Map is a chaotic, area-preserving map on the torus,
+          first described by Vladimir Arnold in the 1960s using an image of a
+          cat, hence the name!.
+        </p>
+      </div>
+
+      <div class="wrap">
+        <div class="about-section">
+          <h2>What is encryption?</h2>
+          <p>
+            You've probably heard of encryption before, it's how your messages,
+            passwords, and photos are kept private online. Encryption takes
+            something readable and scrambles it so that only someone with the
+            right key can unscramble it.
+          </p>
+          <p>
+            Most encryption works with text or numbers. But what about images?
+            Can we scramble a picture the same way? The Arnold Cat Map is one
+            answer to that question and it uses a surprising amount of
+            interesting mathematics to do it.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h2>How would you use this to encrypt an image?</h2>
+        <p>Here's a simple encryption scheme using the Cat Map:</p>
+        <ol class="about-steps">
+          <li>Choose a matrix A — this is your secret key. Keep it private.</li>
+          <li>
+            Apply the Cat Map to your image a chosen number of times — say, 7
+            steps. This is the encrypted image. It looks like noise.
+          </li>
+          <li>
+            Send the scrambled image to your friend. Without the key, they can't
+            recover it.
+          </li>
+          <li>
+            Your friend applies the same Cat Map the remaining steps until the
+            period is complete — and the original image reappears.
+          </li>
+        </ol>
+        <p style="margin-top: 1.2rem">
+          In practice, real image encryption uses more sophisticated techniques,
+          but the Cat Map is used as a component in several modern encryption
+          algorithms because of its strong scrambling properties.
+        </p>
+      </div>
+
+      <div class="about-section">
+        <h2>So what does it actually do?</h2>
+        <p>
+          Imagine your image is a grid of colored squares — like a mosaic or a
+          pixel art drawing. The Cat Map takes every single square and moves it
+          to a new position according to a mathematical rule. Do this once and
+          the image looks scrambled. Do it again and it scrambles further. Keep
+          going and eventually... it comes all the way back to the original.
+          Every single pixel in exactly the right place.
+        </p>
+        <p>
+          This is the key idea — the scrambling is not random. It follows a
+          precise rule, which means it can always be undone. That's what makes
+          it useful for encryption.
+        </p>
+        <div class="formula-pill" style="margin: 1.5rem 0">
+          (x′, y′) = ( a₁₁x + a₁₂y , a₂₁x + a₂₂y ) mod N
+        </div>
+        <p>
+          This formula describes where each pixel at position (x, y) moves to. N
+          is the size of the image. The numbers a₁₁, a₁₂, a₂₁, a₂₂ form a matrix
+          — think of it as the secret key. Change the matrix and you get a
+          completely different scrambling pattern.
+        </p>
+      </div>
+
+      <div class="about-section">
+        <h2>What is mod?</h2>
+        <p>
+          The <em>mod</em> part of the formula is short for modulo — it's the
+          remainder after division. For example, 13 mod 10 = 3, because 13 ÷ 10
+          leaves a remainder of 3. You already use modulo every day when you
+          read a clock — 14:00 is just 14 mod 12 = 2 o'clock.
+        </p>
+        <p>
+          In the Cat Map, mod N keeps all the pixel positions inside the image.
+          Without it, pixels would fly off the edges of the grid. With it, they
+          wrap around — like a game where walking off the right edge brings you
+          back on the left. Mathematicians call this a
+          <em>torus</em>, the same shape as a doughnut.
+        </p>
+      </div>
+
+      <div class="about-section">
+        <h2>Why does it always come back?</h2>
+        <p>
+          Here's the surprising part. No matter what image you start with, and
+          no matter what matrix you choose, the image always returns to its
+          exact original state after enough steps. Always. This is guaranteed by
+          mathematics.
+        </p>
+        <p>
+          The reason is that the image is a finite grid — for example 15×15 =
+          225 pixels. Each pixel can only be in one of 225 positions. So there
+          are only a limited number of ways to arrange them. Eventually the map
+          has to repeat itself, and because it follows a strict rule, it must
+          come back to the very beginning.
+        </p>
+        <p>
+          The number of steps it takes to come back is called the
+          <em>period</em>. For the classic Cat Map on a 15×15 grid, the period
+          is 40. On a 16×16 grid it is only 12. The period can vary wildly
+          depending on the grid size — some sizes take hundreds of steps to
+          return.
+        </p>
+        </div>
+
+        <div class="about-section">
+          <h2>Who invented it?</h2>
+          <p>
+            The map was introduced by the Russian mathematician Vladimir Arnold
+            in the 1960s. He demonstrated it using a picture of a cat — which is
+            where the name comes from. Arnold made major contributions to
+            mathematics and physics throughout his career, and the Cat Map
+            remains one of the most well-known examples of a chaotic dynamical
+            system that is simple enough to understand but rich enough to be
+            genuinely interesting.
+          </p>
+        </div>
+
+        <div class="about-section">
+          <h2>Explore the map</h2>
+          <div class="about-cards">
+            <div class="about-card">
+              <div class="about-card-title">
+                <i class="fa-solid fa-play"></i> Animation
+              </div>
+              <p>
+                Watch the scrambling happen in real time. Try uploading your own
+                photo. Try changing the matrix and see how the period changes.
+              </p>
+            </div>
+            <div class="about-card">
+              <div class="about-card-title">
+                <i class="fa-solid fa-grid"></i> All Iterations
+              </div>
+              <p>
+                See every step laid out at once. Can you spot the moment it
+                starts to look like noise? Can you find the step where it comes
+                back?
+              </p>
+            </div>
+            <div class="about-card">
+              <div class="about-card-title">
+                <i class="fa-solid fa-arrow-right"></i> Step-by-Step
+              </div>
+              <p>
+                See exactly where each colored square goes at each step. Watch
+                the stretching happen before the modulo folds everything back
+                in.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h2>Further reading</h2>
+          <ul class="about-links">
+            <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Arnold%27s_cat_map"
+                target="_blank"
+                rel="noopener"
+              >
+                Arnold's Cat Map — Wikipedia
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://mathworld.wolfram.com/ArnoldsCatMap.html"
+                target="_blank"
+                rel="noopener"
+              >
+                Arnold's Cat Map — Wolfram MathWorld
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Torus"
+                target="_blank"
+                rel="noopener"
+              >
+                What is a Torus? — Wikipedia
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Modular_arithmetic"
+                target="_blank"
+                rel="noopener"
+              >
+                Modular Arithmetic — Wikipedia
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <!-- Scripts — order matters: shared utilities first, then page modules, then nav -->
     <script src="js/shared.js"></script>
