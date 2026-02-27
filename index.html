@@ -20,8 +20,8 @@
   </button>
   <div class="nav-links" id="nav-links">
     <button class="nav-tab active"        onclick="showPage('animation',  this)">Animation</button>
-    <button class="nav-tab" onclick="showPage('iterations', this)">All Iterations</button>
-    <button class="nav-tab"        onclick="showPage('hta',        this)">Step-by-Step</button>
+    <!-- <button class="nav-tab" onclick="showPage('iterations', this)">All Iterations</button> -->
+    <!-- <button class="nav-tab"        onclick="showPage('hta',        this)">Step-by-Step</button> -->
   </div>
 </nav>
 
@@ -141,8 +141,6 @@
 </div>
   </div>
   <p>
-  Step forward and backward through iterations, or let it run automatically.
-      Every image eventually returns to its original state — the number of steps is the <em>period</em>.
 </p>
 </div>
 
@@ -153,7 +151,7 @@
 <!-- ══════════════════════════════════════════════════════════
      PAGE 2 — ALL ITERATIONS
 ═══════════════════════════════════════════════════════════ -->
-<div id="page-iterations" class="page">
+<!-- <div id="page-iterations" class="page">
   <div class="hero">
     <div class="hero-eyebrow">Discrete Dynamical System</div>
     <h1>See<br><em>All Iterations</em></h1>
@@ -170,8 +168,8 @@
 
   <div class="wrap">
 
-    <!-- Controls bar -->
-    <div class="iter-controls">
+    <-- Controls bar -->
+    <!-- <div class="iter-controls">
 
       <div class="iter-cg" style="min-width:148px;">
         <label class="upload-box" id="anim-upload-box" for="anim-file">
@@ -221,16 +219,16 @@
 
     </div>
 
-    <!-- Period detection banner -->
-    <div id="iter-period-row" style="display:none; margin-bottom:0.75rem;">
+    <-- Period detection banner -->
+    <!-- <div id="iter-period-row" style="display:none; margin-bottom:0.75rem;">
       <div class="period-badge">
         🔁 Period detected — image returns to original at iteration
         <strong id="iter-period-n" style="color:var(--accent3)">?</strong>
       </div>
     </div>
 
-    <!-- Iteration cards -->
-    <div class="iterations-grid" id="iterationsGrid">
+    <- Iteration cards -->
+    <!-- <div class="iterations-grid" id="iterationsGrid">
       <div class="empty-state">
 <span class="big" aria-hidden="true">🐱</span>
 <span class="up-icon" id="anim-upload-icon" aria-hidden="true">📂</span>        Click <strong>Show All</strong> to generate iterations.<br>
@@ -239,13 +237,13 @@
     </div>
 
   </div>
-</div>
+</div>  -->
 
 
 <!-- ══════════════════════════════════════════════════════════
      PAGE 3 — STEP-BY-STEP (HTA)
 ═══════════════════════════════════════════════════════════ -->
-<div id="page-hta" class="page">
+<!-- <div id="page-hta" class="page">
   <div class="hero">
     <div class="hero-eyebrow">Linear Map → Modulo</div>
     <h1>Under<br>the <em>Hood</em></h1>
@@ -292,7 +290,7 @@
     </div>
 
   </div>
-</div>
+</div> -->
 
 
 <!-- Scripts — order matters: shared utilities first, then page modules, then nav -->
