@@ -148,18 +148,15 @@ function animDetectPeriod() {
 
 function animStep(dir) {
   if (!animOrigData) return;
-
   const { a11, a12, a21, a22 } = animGetMatrix();
 
   if (dir === 1) {
     if (animHistory.length > animIterations + 1) {
-      // Re-use cached frame
       animIterations++;
       animCurrentData = new ImageData(
         new Uint8ClampedArray(animHistory[animIterations].data), animN, animN
       );
     } else {
-      // Compute new frame
       const next = applyArnoldTransform(animCurrentData, a11, a12, a21, a22);
       animIterations++;
       animHistory = animHistory.slice(0, animIterations);
@@ -167,6 +164,15 @@ function animStep(dir) {
       animCurrentData = next;
     }
     animCtx.putImageData(animCurrentData, 0, 0);
+
+    // Reset back to original once the period is reached
+ if (animPeriod && animIterations >= animPeriod) {
+  animStop();
+  animCurrentData = new ImageData(new Uint8ClampedArray(animOrigData.data), animN, animN);
+  animCtx.putImageData(animCurrentData, 0, 0);
+  animIterations = 0;
+  animHistory    = [new ImageData(new Uint8ClampedArray(animOrigData.data), animN, animN)];
+}
 
   } else {
     if (animIterations > 0) {
