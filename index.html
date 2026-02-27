@@ -1,157 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arnold Cat Map</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arnold Cat Map</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ── NAVIGATION ── -->
+    <nav>
+      <div class="nav-logo">Arnold<span>CatMap</span></div>
+      <button
+        class="nav-hamburger"
+        id="nav-hamburger"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        onclick="toggleNav()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <button class="nav-tab active" onclick="showPage('animation', this)">
+          Animation
+        </button>
+        <!-- <button class="nav-tab" onclick="showPage('iterations', this)">All Iterations</button> -->
+        <!-- <button class="nav-tab"        onclick="showPage('hta',        this)">Step-by-Step</button> -->
+      </div>
+    </nav>
 
-</head>
-<body>
-
-<!-- ── NAVIGATION ── -->
-<nav>
-  <div class="nav-logo">Arnold<span>CatMap</span></div>
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleNav()">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <div class="nav-links" id="nav-links">
-    <button class="nav-tab active"        onclick="showPage('animation',  this)">Animation</button>
-    <!-- <button class="nav-tab" onclick="showPage('iterations', this)">All Iterations</button> -->
-    <!-- <button class="nav-tab"        onclick="showPage('hta',        this)">Step-by-Step</button> -->
-  </div>
-</nav>
-
-
-<!-- ══════════════════════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════════════
      PAGE 1 — ANIMATION
 ═══════════════════════════════════════════════════════════ -->
-<div id="page-animation" class="page active">
-  <div class="hero">
-    <div class="hero-eyebrow">Animated Chaos</div>
-    <h1><em>Animate</em> the Cat Map</h1>
-    <p class="hero-sub">
-      Enter pixel size, upload an image, and choose a matrix with det = +/-1. Then watch the chaos unfold! 
-    </p>
-  </div>
-
-  <div class="wrap">
-    <!-- AFTER -->
-<div class="anim-layout">
-
-  <!-- Left: upload panel -->
-  <div class="anim-sidebar">
-    <div class="panel">
-      <div class="panel-head"><span class="dot"></span>Image</div>
-      <div class="sidebar-body">
-        <div>
-          <label class="field-label">Pixel Size</label>
-          <input type="number" id="anim-size" value="16" min="2" max="501"
-            style="width:80px;" onchange="animOnSizeChange()">
-        </div>
-        <label class="upload-box" id="anim-upload-box" for="anim-file">
-  <span class="up-icon" id="anim-upload-icon">📂</span>
-  <div class="up-lbl" id="anim-upload-lbl">Upload image</div>
-  <p id="anim-upload-sub">PNG / JPG / GIF</p>
-  <input type="file" id="anim-file" accept="image/*" onchange="animOnUpload(this)">
-</label>
-      
+    <div id="page-animation" class="page active">
+      <div class="hero">
+        <h1><em>Animate</em> the Cat Map</h1>
+        <p class="hero-sub">
+          Enter pixel size, upload an image, and choose a matrix with det =
+          +/-1. Then watch the chaos unfold!
+        </p>
       </div>
-      
-    </div>
-      <div id="anim-period-info" class="period-badge">
-          Period: <strong id="anim-period-val" style="color:var(--accent3)">?</strong> iterations
-        </div>
-  </div>
 
-  <!-- Centre: canvas + progress bar -->
-  <div>
-    <div class="canvas-wrap">
-<canvas id="anim-canvas" width="16" height="16"
-  role="img"
-  aria-label="Arnold Cat Map canvas"
-  aria-describedby="anim-canvas-desc">
-</canvas>
-<p id="anim-canvas-desc" class="sr-only" aria-live="polite">
-  Iteration 0
-</p>      <div class="canvas-badge">Iteration: <span class="n" id="anim-n">0</span></div>
-<button class="canvas-download" onclick="animSaveFrame()" aria-label="Save current frame as PNG">
-<i class="fa-solid fa-file-arrow-down"></i> </button>    </div>
-    <div class="progress-wrap">
-      <div class="progress-track">
-        <div class="progress-fill" id="anim-progress"></div>
-      </div>
-      <div class="progress-labels">
-        <span>n = 0</span>
-        <span id="anim-period-lbl">period = ?</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right: matrix + playback panels -->
-  <div class="anim-sidebar">
-    <div class="panel">
-      <div class="panel-head"><span class="dot dot-purple"></span>Playback</div>
-      <div class="sidebar-body">
-       <div class="speed-stepper">
-        <label class="field-label" style="font-size:1rem">Timestep: </label>
-
-  <button class="speed-btn" onclick="changeTimestep(-50)" aria-label="Decrease timestep">−</button>
-<span id="speed-lbl">300ms</span>
-<button class="speed-btn" onclick="changeTimestep(50)"  aria-label="Increase timestep">+</button>
-</div>
-        <div class="btn-row">
-          <button class="btn btn-step"  aria-label="Step backward one iteration" onclick="animStep(-1)">← Back</button>
-          <button class="btn btn-step"  aria-label="Step forward one iteration" onclick="animStep(1)">Forward →</button>
-        </div>
-        <button class="btn btn-cyan" id="anim-play-btn"
-          onclick="animToggle()" style="width:100%">▶ Animate</button>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-head"><span class="dot dot-red"></span>Matrix</div>
-      <div class="sidebar-body">
-        <div class="matrix-grid">
-          <div class="matrix-cell">
-            <label class="field-label" style="font-size:1rem">a₁₁</label>
-            <input type="number" id="aa11" value="1" min="0" onChange="animOnMatrixChange()">
+      <div class="wrap">
+        <!-- AFTER -->
+        <div class="anim-layout">
+          <!-- Left: upload panel -->
+          <div class="anim-sidebar">
+            <div class="panel">
+              <div class="panel-head"><span class="dot"></span>Image</div>
+              <div class="sidebar-body">
+                <div>
+                  <label class="field-label">Pixel Size</label>
+                  <input
+                    type="number"
+                    id="anim-size"
+                    value="16"
+                    min="2"
+                    max="501"
+                    style="width: 80px"
+                    onchange="animOnSizeChange()"
+                  />
+                </div>
+                <label class="upload-box" id="anim-upload-box" for="anim-file">
+                  <span class="up-icon" id="anim-upload-icon">📂</span>
+                  <div class="up-lbl" id="anim-upload-lbl">Upload image</div>
+                  <p id="anim-upload-sub">PNG / JPG / GIF</p>
+                  <input
+                    type="file"
+                    id="anim-file"
+                    accept="image/*"
+                    onchange="animOnUpload(this)"
+                  />
+                </label>
+              </div>
+            </div>
+            <div id="anim-period-info" class="period-badge">
+              Period:
+              <strong id="anim-period-val" style="color: var(--accent3)"
+                >?</strong
+              >
+              iterations
+            </div>
           </div>
-          <div class="matrix-cell">
-            <label class="field-label" style="font-size:1rem">a₁₂</label>
-            <input type="number" id="aa12" value="1" min="0" onChange="animOnMatrixChange()">
+
+          <!-- Centre: canvas + progress bar -->
+          <div>
+            <div class="canvas-wrap">
+              <canvas
+                id="anim-canvas"
+                width="16"
+                height="16"
+                role="img"
+                aria-label="Arnold Cat Map canvas"
+                aria-describedby="anim-canvas-desc"
+              >
+              </canvas>
+              <p id="anim-canvas-desc" class="sr-only" aria-live="polite">
+                Iteration 0
+              </p>
+              <div class="canvas-badge">
+                Iteration: <span class="n" id="anim-n">0</span>
+              </div>
+              <button
+                class="canvas-download"
+                onclick="animSaveFrame()"
+                aria-label="Save current frame as PNG"
+              >
+                <i class="fa-solid fa-file-arrow-down"></i>
+              </button>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-track">
+                <div class="progress-fill" id="anim-progress"></div>
+              </div>
+              <div class="progress-labels">
+                <span>n = 0</span>
+                <span id="anim-period-lbl">period = ?</span>
+              </div>
+            </div>
           </div>
-          <div class="matrix-cell">
-            <label class="field-label" style="font-size:1rem">a₂₁</label>
-            <input type="number" id="aa21" value="1" min="0" onChange="animOnMatrixChange()">
-          </div>
-          <div class="matrix-cell">
-            <label class="field-label" style="font-size:1rem">a₂₂</label>
-            <input type="number" id="aa22" value="0" min="0" onChange="animOnMatrixChange()">
+
+          <!-- Right: matrix + playback panels -->
+          <div class="anim-sidebar">
+            <div class="panel">
+              <div class="panel-head">
+                <span class="dot dot-purple"></span>Playback
+              </div>
+              <div class="sidebar-body">
+                <div class="speed-stepper">
+                  <label class="field-label" style="font-size: 1rem"
+                    >Timestep:
+                  </label>
+
+                  <button
+                    class="speed-btn"
+                    onclick="changeTimestep(-50)"
+                    aria-label="Decrease timestep"
+                  >
+                    −
+                  </button>
+                  <span id="speed-lbl">300ms</span>
+                  <button
+                    class="speed-btn"
+                    onclick="changeTimestep(50)"
+                    aria-label="Increase timestep"
+                  >
+                    +
+                  </button>
+                </div>
+                <div class="btn-row">
+                  <button
+                    class="btn btn-step"
+                    aria-label="Step backward one iteration"
+                    onclick="animStep(-1)"
+                  >
+                    ← Back
+                  </button>
+                  <button
+                    class="btn btn-step"
+                    aria-label="Step forward one iteration"
+                    onclick="animStep(1)"
+                  >
+                    Forward →
+                  </button>
+                </div>
+                <button
+                  class="btn btn-cyan"
+                  id="anim-play-btn"
+                  onclick="animToggle()"
+                  style="width: 100%"
+                >
+                  ▶ Animate
+                </button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <span class="dot dot-red"></span>Matrix
+              </div>
+              <div class="sidebar-body">
+                <div class="matrix-grid">
+                  <div class="matrix-cell">
+                    <label class="field-label" style="font-size: 1rem"
+                      >a₁₁</label
+                    >
+                    <input
+                      type="number"
+                      id="aa11"
+                      value="1"
+                      min="0"
+                      onChange="animOnMatrixChange()"
+                    />
+                  </div>
+                  <div class="matrix-cell">
+                    <label class="field-label" style="font-size: 1rem"
+                      >a₁₂</label
+                    >
+                    <input
+                      type="number"
+                      id="aa12"
+                      value="1"
+                      min="0"
+                      onChange="animOnMatrixChange()"
+                    />
+                  </div>
+                  <div class="matrix-cell">
+                    <label class="field-label" style="font-size: 1rem"
+                      >a₂₁</label
+                    >
+                    <input
+                      type="number"
+                      id="aa21"
+                      value="1"
+                      min="0"
+                      onChange="animOnMatrixChange()"
+                    />
+                  </div>
+                  <div class="matrix-cell">
+                    <label class="field-label" style="font-size: 1rem"
+                      >a₂₂</label
+                    >
+                    <input
+                      type="number"
+                      id="aa22"
+                      value="0"
+                      min="0"
+                      onChange="animOnMatrixChange()"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="btn btn-ghost"
+              onclick="animReset()"
+              aria-label="Reset to original image"
+              style="background: rgba(59, 191, 191, 0.1)"
+            >
+              ↺ Reset
+            </button>
           </div>
         </div>
-        <button class="btn btn-ghost" onclick="animReset()" aria-label="Reset to original image" style="width:100%">↺ Reset</button>
       </div>
+      <p></p>
     </div>
 
-  </div>
-</div>
-  </div>
-  <p>
-</p>
-</div>
-
-
-
-
-
-<!-- ══════════════════════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════════════
      PAGE 2 — ALL ITERATIONS
 ═══════════════════════════════════════════════════════════ -->
-<!-- <div id="page-iterations" class="page">
+    <!-- <div id="page-iterations" class="page">
   <div class="hero">
     <div class="hero-eyebrow">Discrete Dynamical System</div>
     <h1>See<br><em>All Iterations</em></h1>
@@ -239,11 +342,10 @@
   </div>
 </div>  -->
 
-
-<!-- ══════════════════════════════════════════════════════════
+    <!-- ══════════════════════════════════════════════════════════
      PAGE 3 — STEP-BY-STEP (HTA)
 ═══════════════════════════════════════════════════════════ -->
-<!-- <div id="page-hta" class="page">
+    <!-- <div id="page-hta" class="page">
   <div class="hero">
     <div class="hero-eyebrow">Linear Map → Modulo</div>
     <h1>Under<br>the <em>Hood</em></h1>
@@ -292,18 +394,16 @@
   </div>
 </div> -->
 
-
-<!-- Scripts — order matters: shared utilities first, then page modules, then nav -->
-<script src="js/shared.js"></script>
-<script src="js/iterations.js"></script>
-<script src="js/animation.js"></script>
-<script src="js/hta.js"></script>
-<script src="js/nav.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    initAnim();
-  });
-</script>
-
-</body>
+    <!-- Scripts — order matters: shared utilities first, then page modules, then nav -->
+    <script src="js/shared.js"></script>
+    <script src="js/iterations.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="js/hta.js"></script>
+    <script src="js/nav.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        initAnim();
+      });
+    </script>
+  </body>
 </html>
