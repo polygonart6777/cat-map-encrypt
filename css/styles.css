@@ -839,3 +839,9 @@ select option {
   white-space: nowrap;
   border: 0;
 }
+
+.input-error {
+  font-size: 0.62rem;
+  color: var(--accent);
+  margin-top: 0.25rem;
+}

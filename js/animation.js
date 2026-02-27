@@ -50,20 +50,24 @@ function animLoadDefault() {
 /* ── Event handlers ── */
 
 function animOnSizeChange() {
-  animN = parseInt(document.getElementById("anim-size").value);
+  const input = document.getElementById("anim-size");
+  const error = document.getElementById("anim-size-error");
+  const val = parseInt(input.value) || 16;
+
+  if (val > 500) {
+    input.value = 500;
+    error.style.display = "block";
+  } else if (val < 2) {
+    input.value = 2;
+    error.style.display = "none";
+  } else {
+    error.style.display = "none";
+  }
+
+  animN = Math.min(500, Math.max(2, parseInt(input.value)));
   animStop();
   animLoadDefault();
   resetUploadBox("anim", "PNG / JPG / GIF");
-
-  // reset upload box back to default state
-  const box = document.getElementById("anim-upload-box");
-  const icon = document.getElementById("anim-upload-icon");
-  const lbl = document.getElementById("anim-upload-lbl");
-  const sub = document.getElementById("anim-upload-sub");
-  box.classList.remove("uploaded");
-  icon.textContent = "📂";
-  lbl.textContent = "Upload image";
-  sub.textContent = "PNG / JPG / GIF";
 }
 
 function animOnUpload(input) {
