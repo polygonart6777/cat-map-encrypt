@@ -481,7 +481,7 @@ select option { background: var(--surface); }
 
 .anim-layout {
   display: grid;
-  grid-template-columns: 330px 700px 330px;
+  grid-template-columns: 330px 650px 330px;
   gap: 1.4rem;
   align-items: center;
 }
@@ -503,17 +503,13 @@ select option { background: var(--surface); }
   background: rgba(232, 249, 249, 0.92);
   border: 1px solid var(--border);
   padding: 0.28rem 0.75rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   border-radius: 6px;
   backdrop-filter: blur(6px);
   color: var(--text);
 }
 .canvas-badge .n { color: var(--text); }
 
-@media (max-width: 720px) { .anim-layout { grid-template-columns: 1fr; } }
-.canvas-badge {
-  display:none;
-}
 
 .progress-wrap  { margin-top: 0.7rem; }
 .progress-track { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
