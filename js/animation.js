@@ -114,17 +114,6 @@ function animOnUpload(input) {
   reader.readAsDataURL(file);
 }
 
-/* ── Matrix helper ── */
-
-function animGetMatrix() {
-  return {
-    a11: parseInt(document.getElementById("aa11").value) || 1,
-    a12: parseInt(document.getElementById("aa12").value) || 1,
-    a21: parseInt(document.getElementById("aa21").value) || 1,
-    a22: parseInt(document.getElementById("aa22").value) || 0,
-  };
-}
-
 /* ── Period detection ── */
 
 function animDetectPeriod() {
@@ -291,6 +280,9 @@ function animSaveFrame() {
 
 function animOnMatrixChange() {
   animStop();
+  const { a11, a12, a21, a22 } = animGetMatrix();
+  updateMatrixWarning("anim", a11, a12, a21, a22);
+
   animCurrentData = new ImageData(
     new Uint8ClampedArray(animOrigData.data),
     animN,

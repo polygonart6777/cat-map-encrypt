@@ -319,6 +319,28 @@ select option {
   text-align: center;
 }
 
+.matrix-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(192, 90, 56, 0.08);
+  border: 1px solid rgba(192, 90, 56, 0.4);
+  color: var(--accent);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 0.4rem;
+}
+
+input[type="number"].matrix-invalid {
+  border-color: var(--accent);
+  background: rgba(192, 90, 56, 0.05);
+}
+
+input[type="number"].matrix-invalid:focus {
+  outline-color: var(--accent);
+}
+
 /* ── BUTTONS ── */
 .btn {
   display: inline-flex;

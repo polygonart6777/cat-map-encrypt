@@ -1,0 +1,213 @@
+<div id="page-animation" class="page active">
+  <div class="hero">
+    <h1>
+      <div class="nav-logo">Animate <span>the Cat Map </span></div>
+    </h1>
+    <p class="hero-sub">
+      Enter pixel size, upload an image, and choose a matrix to watch the
+      encryption process evolve.
+    </p>
+  </div>
+
+  <div class="wrap">
+    <!-- AFTER -->
+    <div class="anim-layout">
+      <!-- Left: upload panel -->
+      <div class="anim-sidebar">
+        <div class="panel">
+          <div class="panel-head"><span class="dot"></span>Image</div>
+          <div class="sidebar-body">
+            <div>
+              <label class="field-label">Pixel Size</label>
+              <input
+                type="number"
+                id="anim-size"
+                value="16"
+                min="2"
+                max="500"
+                style="width: 80px"
+                onchange="animOnSizeChange()"
+              />
+              <p id="anim-size-error" class="input-error" style="display: none">
+                Maximum size is 500
+              </p>
+            </div>
+            <label class="upload-box" id="anim-upload-box" for="anim-file">
+              <span class="up-icon" id="anim-upload-icon">📂</span>
+              <div class="up-lbl" id="anim-upload-lbl">Upload image</div>
+              <p id="anim-upload-sub">PNG / JPG / GIF</p>
+              <input
+                type="file"
+                id="anim-file"
+                accept="image/*"
+                onchange="animOnUpload(this)"
+              />
+            </label>
+          </div>
+        </div>
+        <div id="anim-period-info" class="period-badge">
+          Image returns in
+          <strong id="anim-period-val" style="color: var(--accent3)">?</strong>
+          steps
+        </div>
+      </div>
+
+      <!-- Centre: canvas + progress bar -->
+      <div>
+        <div class="canvas-wrap">
+          <canvas
+            id="anim-canvas"
+            width="16"
+            height="16"
+            role="img"
+            aria-label="Arnold Cat Map canvas"
+            aria-describedby="anim-canvas-desc"
+          >
+          </canvas>
+          <p id="anim-canvas-desc" class="sr-only" aria-live="polite">
+            Iteration 0
+          </p>
+          <div class="canvas-badge">
+            Iteration: <span class="n" id="anim-n">0</span>
+          </div>
+          <button
+            class="canvas-download"
+            onclick="animSaveFrame()"
+            aria-label="Save current frame as PNG"
+          >
+            <i class="fa-solid fa-file-arrow-down"></i>
+          </button>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-track">
+            <div class="progress-fill" id="anim-progress"></div>
+          </div>
+          <div class="progress-labels">
+            <span>n = 0</span>
+            <span id="anim-period-lbl">period = ?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: matrix + playback panels -->
+      <div class="anim-sidebar">
+        <div class="panel">
+          <div class="panel-head">
+            <span class="dot dot-purple"></span>Playback
+          </div>
+          <div class="sidebar-body">
+            <div class="speed-stepper">
+              <label class="field-label" style="font-size: 1rem"
+                >Timestep:
+              </label>
+
+              <button
+                class="speed-btn"
+                onclick="changeTimestep(-50)"
+                aria-label="Decrease timestep"
+              >
+                −
+              </button>
+              <span id="speed-lbl">300ms</span>
+              <button
+                class="speed-btn"
+                onclick="changeTimestep(50)"
+                aria-label="Increase timestep"
+              >
+                +
+              </button>
+            </div>
+            <div class="btn-row">
+              <button
+                class="btn btn-step"
+                aria-label="Step backward one iteration"
+                onclick="animStep(-1)"
+              >
+                ← Back
+              </button>
+              <button
+                class="btn btn-step"
+                aria-label="Step forward one iteration"
+                onclick="animStep(1)"
+              >
+                Forward →
+              </button>
+            </div>
+            <button
+              class="btn btn-cyan"
+              id="anim-play-btn"
+              onclick="animToggle()"
+              style="width: 100%"
+            >
+              ▶ Animate
+            </button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><span class="dot dot-red"></span>Matrix</div>
+          <div class="sidebar-body">
+            <div class="matrix-grid">
+              <div class="matrix-cell">
+                <input
+                  type="number"
+                  id="aa11"
+                  value="1"
+                  min="0"
+                  onchange="animOnMatrixChange()"
+                  oninput="animOnMatrixChange()"
+                />
+              </div>
+              <div class="matrix-cell">
+                <input
+                  type="number"
+                  id="aa12"
+                  value="1"
+                  min="0"
+                  onchange="animOnMatrixChange()"
+                  oninput="animOnMatrixChange()"
+                />
+              </div>
+              <div class="matrix-cell">
+                <input
+                  type="number"
+                  id="aa21"
+                  value="1"
+                  min="0"
+                  onchange="animOnMatrixChange()"
+                  oninput="animOnMatrixChange()"
+                />
+              </div>
+              <div class="matrix-cell">
+                <input
+                  type="number"
+                  id="aa22"
+                  value="0"
+                  min="0"
+                  onchange="animOnMatrixChange()"
+                  oninput="animOnMatrixChange()"
+                />
+              </div>
+            </div>
+            <div
+              class="matrix-warning"
+              id="anim-matrix-warning"
+              style="display: none"
+            >
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              det ≠ ±1 or eigenvalues have length 1
+            </div>
+          </div>
+        </div>
+        <button
+          class="btn btn-ghost"
+          onclick="animReset()"
+          aria-label="Reset to original image"
+          style="background: rgba(59, 191, 191, 0.1)"
+        >
+          ↺ Reset
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
