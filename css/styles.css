@@ -987,3 +987,51 @@ input[type="number"].matrix-invalid:focus {
   color: var(--accent2);
   font-style: italic;
 }
+
+.qr-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.qr-image-wrap {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 0;
+  display: inline-flex;
+}
+
+.qr-image {
+  width: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.qr-url-wrap {
+  width: 100%;
+}
+
+.qr-url {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.65rem 1rem;
+  font-size: 1.5rem;
+  color: var(--accent2);
+  word-break: break-all;
+  margin-top: 0.3rem;
+}
+
+.qr-url i {
+  flex-shrink: 0;
+  color: var(--muted);
+}

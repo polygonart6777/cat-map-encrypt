@@ -32,6 +32,9 @@
         <!-- <button class="nav-tab" onclick="showPage('iterations', this)">All Iterations</button> -->
         <!-- <button class="nav-tab"        onclick="showPage('hta',        this)">Step-by-Step</button> -->
         <button class="nav-tab" onclick="showPage('about', this)">About</button>
+        <button class="nav-tab" onclick="showPage('qrcode', this)">
+          QR Code
+        </button>
       </div>
     </nav>
 
@@ -71,6 +74,7 @@
 
         await loadPage("about");
         initAboutDiagram();
+        await loadPage("qrcode");
       }
 
       document.addEventListener("DOMContentLoaded", initApp);

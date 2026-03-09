@@ -1,0 +1,42 @@
+<div id="page-qrcode" class="page">
+  <div class="hero">
+    <h1>
+      <div class="nav-logo">Share <span>the Cat Map </span></div>
+    </h1>
+    <p class="hero-sub">
+      Point your phone camera at the QR code below to share the Arnold Cat Map
+      with a friend. You can also copy the direct link below to share it in a
+      message or email.
+    </p>
+  </div>
+
+  <div
+    class="wrap"
+    style="max-width: 860px; margin: 0 auto; padding: 0 2rem 5rem"
+  >
+    <div class="qr-card">
+      <div class="qr-image-wrap">
+        <img
+          src="assets/qrcode.png"
+          alt="QR code for the Arnold Cat Map site"
+          class="qr-image"
+        />
+      </div>
+
+      <div class="qr-url-wrap">
+        <span class="field-label">Direct link</span>
+        <div class="qr-url">
+          <i class="fa-solid fa-link"></i>
+          <span id="qr-url-text"
+            >https://polygonart6777.github.io/cat-map-encrypt/</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("qr-url-text").textContent =
+    window.location.href.replace(/\/$/, "");
+</script>
