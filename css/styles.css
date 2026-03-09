@@ -431,7 +431,6 @@ input[type="number"].matrix-invalid:focus {
 .upload-box .up-lbl {
   font-size: 1.5rem;
   letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--accent2);
 }
 .upload-box p {
@@ -830,7 +829,6 @@ input[type="number"].matrix-invalid:focus {
 .hta-col .lbl {
   font-size: 1.5rem;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--muted);
 }
 .hta-col canvas {
@@ -963,8 +961,29 @@ input[type="number"].matrix-invalid:focus {
 }
 
 .about-steps li::marker {
-  color: var(--accent); /* terracotta #c05a38 — ~4.8:1 on --bg */
+  color: var(--accent);
   font-family: "Cormorant", serif;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
+}
+
+.about-list {
+  margin: 0.75rem 0 0.75rem 1.5rem;
+}
+
+.about-list li {
+  color: var(--muted);
+  font-size: 1.5rem;
+  line-height: 1.9;
+  padding-left: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.about-list li::marker {
+  color: var(--accent);
+}
+
+.about-list em {
+  color: var(--accent2);
+  font-style: italic;
 }

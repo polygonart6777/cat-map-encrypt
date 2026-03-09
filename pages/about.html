@@ -2,13 +2,162 @@
       <div class="hero">
         <h1><div class="nav-logo">About  <span>the Cat Map </span> </div></h1>
         <p class="hero-sub">
-          The Arnold Cat Map is a chaotic, area-preserving map on the torus,
-          first described by Vladimir Arnold in the 1960s using an image of a
-          cat, hence the name!.
+          The Arnold Cat Map is a part of a larger class of dynamical systems that  are chaotic, area-preserving maps on the torus, called Hyperbolic Toral Automorphisms. 
+        </p>
+        <p class="hero-sub">
+            <br>
+          The example we use was first described by Vladimir Arnold in the 1960s using an image of a
+          <strong>CAT</strong> (Continuous Automorphism Torus) hence the name!
+        </p>
+      </div>
+      <div class="wrap">
+        <div class="about-section">
+            <h2>How the transform works</h2>
+            <p>Each step of the Cat Map happens in two or three stages:</p>
+                <ul class="about-list">
+                <li>If the determinant is −1, there will be a <em>flip across the diagonal</em>.</li>
+                <li>The matrix <em>shears</em> the grid, taking points outside the original square.</li>
+                <li>The <em>modulo</em> folds everything back in.</li>
+                </ul>
+            <p>
+                The colored grid illustrates the Arnold Cat map on a ten-by-ten grid of pixels.
+            </p>
+        </p>
+    
+            <div class="hta-canvases" style="margin-top:1.5rem;">
+                <div class="hta-col">
+                    <div class="lbl">Original</div>
+                    <canvas id="about-hta-before" width="280" height="280"></canvas>
+                </div>
+                <div class="hta-col">
+                    <div class="lbl">Flip Across Diagonal</div>
+                    <canvas id="about-hta-flip" width="280" height="280"></canvas>
+                </div>
+                <div class="hta-col">
+                    <div class="lbl">Shear</div>
+                    <canvas id="about-hta-linear" width="280" height="280"></canvas>
+                </div>
+                <div class="hta-col">
+                    <div class="lbl">Mod N</div>
+                    <canvas id="about-hta-after" width="280" height="280"></canvas>
+                </div>
+            </div>
+        </div>
+
+              <div class="about-section">
+        <h2>So what does it actually do?</h2>
+        <p>
+          The Cat Map takes every single square and moves it
+          to a new position according to a mathematical rule. Do this once and
+          the image looks scrambled. Do it again and it scrambles further. Keep
+          going and eventually... it comes all the way back to the original.
+          Every single pixel in exactly the right place.
+        </p>
+        <p>
+          This is the key idea, the scrambling is not random. It follows a
+          precise rule, which means it can always be undone. That's what makes
+          it useful for ...dun, dun, duuun... <em> encryption </em>.
+        </p>
+        <div class="formula-pill" style="margin: 1.5rem 0">
+          (x′, y′) = ( a₁₁x + a₁₂y , a₂₁x + a₂₂y ) mod N
+        </div>
+        <p>
+          This formula describes where each pixel at position (x, y) moves to. N by N
+          is the number of pixels of the image. You can change the matrix to get a new CAT map and a
+          completely different scrambling pattern.
         </p>
       </div>
 
-      <div class="wrap">
+        <div class="about-section">
+        <h2>Which matrices are best to use?</h2>  
+        <p>You can choose any 2×2 matrix, but not all matrices are equally 
+          good for scrambling. In this case, we want the map to be area preserving 
+          so that the matrix should have determinant +1 or -1 and none of 
+          its eigenvalues should have length 1.</p>
+      </div>
+
+      <!-- ADD after the mod section -->
+
+<div class="about-section">
+  <h2>What is a determinant?</h2>
+  <p>
+    The determinant is a single number that describes what a matrix does to area.
+    For a 2×2 matrix:
+  </p>
+  <div class="formula-pill" style="margin: 1.5rem 0;">
+    det(A) = a₁₁·a₂₂ − a₁₂·a₂₁
+  </div>
+  <p>
+    Think of it this way — if you draw a square on the grid and apply the matrix,
+    the determinant tells you how much the area of that square changes:
+  </p>
+  <ul class="about-list">
+    <li>det = 1 means the area stays exactly the same — the transformation is <em>area-preserving</em>.</li>
+    <li>det = −1 means the area stays the same but the shape gets <em>flipped</em> — reflected across the diagonal.</li>
+    <li>det = 2 means the area doubles. det = 0.5 means it halves.</li>
+    <li>det = 0 means the shape collapses completely — the matrix is not invertible and the image cannot be recovered.</li>
+  </ul>
+  <p>
+    For the Arnold Cat Map we need the determinant to be exactly ±1. This guarantees
+    that no pixel is lost or duplicated — every pixel moves to exactly one new
+    position, and the transformation can always be undone. This is why the site
+    shows a warning when you enter a matrix with a different determinant.
+  </p>
+</div>
+
+<div class="about-section">
+  <h2>What are eigenvalues?</h2>
+  <p>
+    Eigenvalues describe the directions in which a matrix purely stretches or
+    compresses, without rotating. For a 2×2 matrix A, the eigenvalues λ are
+    found by solving the characteristic equation:
+  </p>
+  <div class="formula-pill" style="margin: 1.5rem 0;">
+    λ² − (a₁₁ + a₂₂)·λ + det(A) = 0
+  </div>
+  <p>
+    Using the quadratic formula this gives:
+  </p>
+  <div class="formula-pill" style="margin: 1.5rem 0;">
+    λ = ( (a₁₁ + a₂₂) ± √( (a₁₁ + a₂₂)² − 4·det(A) ) ) / 2
+  </div>
+  <p>
+    For the Cat Map to produce chaotic scrambling, the eigenvalues need to
+    behave in a specific way:
+  </p>
+  <ul class="about-list">
+    <li>One eigenvalue must be <em>greater than 1</em> in absolute value, this is the stretching direction.</li>
+    <li>One eigenvalue must be <em>less than 1</em> in absolute value, this is the compressing direction.</li>
+    <li>If both eigenvalues are greater than 1, everything expands without bound, no chaos.</li>
+    <li>If both are less than 1, everything collapses, no chaos.</li>
+    <li>If either eigenvalue equals exactly 1, there is no stretching in that direction,the scrambling is weak or non-existent.</li>
+  </ul>
+  <p>
+    For the classic matrix A = [[1, 1], [1, 0]], the eigenvalues are
+    (1 ± √5) / 2 — approximately <em>1.618</em> and <em>−0.618</em>.
+    These are the golden ratio and its conjugate. One is greater than 1,
+    one is less than 1 in absolute value, which is exactly what produces
+    the strong chaotic scrambling the Cat Map is known for.
+  </p>
+</div>
+
+            <div class="about-section">
+        <h2>What is mod?</h2>
+        <p>
+          The <em>mod</em> part of the formula is short for modulo — it's the
+          remainder after division. For example, 13 mod 10 = 3, because 13 ÷ 10
+          leaves a remainder of 3. You already use modulo every day when you
+          read a clock — 14:00 is just 14 mod 12 = 2 o'clock.
+        </p>
+        <p>
+          In the Cat Map, mod N keeps all the pixel positions inside the image.
+          Without it, pixels would fly off the edges of the grid. With it, they
+          wrap around, like a game where walking off the right edge brings you
+          back on the left. Mathematicians call this a
+          <em>torus</em>, the same shape as a doughnut.
+        </p>
+      </div>
+
         <div class="about-section">
           <h2>What is encryption?</h2>
           <p>
@@ -49,57 +198,6 @@
           but the Cat Map is used as a component in several modern encryption
           algorithms because of its strong scrambling properties.
         </p>
-      </div>
-
-      <div class="about-section">
-        <h2>So what does it actually do?</h2>
-        <p>
-          Imagine your image is a grid of colored squares — like a mosaic or a
-          pixel art drawing. The Cat Map takes every single square and moves it
-          to a new position according to a mathematical rule. Do this once and
-          the image looks scrambled. Do it again and it scrambles further. Keep
-          going and eventually... it comes all the way back to the original.
-          Every single pixel in exactly the right place.
-        </p>
-        <p>
-          This is the key idea — the scrambling is not random. It follows a
-          precise rule, which means it can always be undone. That's what makes
-          it useful for encryption.
-        </p>
-        <div class="formula-pill" style="margin: 1.5rem 0">
-          (x′, y′) = ( a₁₁x + a₁₂y , a₂₁x + a₂₂y ) mod N
-        </div>
-        <p>
-          This formula describes where each pixel at position (x, y) moves to. N
-          is the size of the image. The numbers a₁₁, a₁₂, a₂₁, a₂₂ form a matrix
-          — think of it as the secret key. Change the matrix and you get a
-          completely different scrambling pattern.
-        </p>
-      </div>
-
-      <div class="about-section">
-        <h2>What is mod?</h2>
-        <p>
-          The <em>mod</em> part of the formula is short for modulo — it's the
-          remainder after division. For example, 13 mod 10 = 3, because 13 ÷ 10
-          leaves a remainder of 3. You already use modulo every day when you
-          read a clock — 14:00 is just 14 mod 12 = 2 o'clock.
-        </p>
-        <p>
-          In the Cat Map, mod N keeps all the pixel positions inside the image.
-          Without it, pixels would fly off the edges of the grid. With it, they
-          wrap around — like a game where walking off the right edge brings you
-          back on the left. Mathematicians call this a
-          <em>torus</em>, the same shape as a doughnut.
-        </p>
-      </div>
-
-            <div class="about-section">
-        <h2>Which matrices are best to use?</h2>  
-        <p>You can choose any 2×2 matrix, but not all matrices are equally 
-          good for scrambling. In this case, we want the map to be area preserving 
-          so that the matrix should have determinant +1 or -1 and none of 
-          its eigenvalues should have length 1.</p>
       </div>
 
       <div class="about-section">
