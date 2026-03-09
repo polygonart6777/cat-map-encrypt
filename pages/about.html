@@ -89,7 +89,12 @@
         <h2>So what does it actually do?</h2>
         <p>
           The Cat Map takes every single square and moves it
-          to a new position according to a mathematical rule. Do this once and
+          to a new position according to a mathematical rule. This formula describes where each pixel at position (x, y) moves to. </p>
+       <div class="formula-pill" style="margin: 1.5rem 0">
+  \( \begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} \mod N  = \begin{pmatrix} a_{11} x + a_{12} y  \mod N \\ a_{21} x + a_{22} y  \mod N \end{pmatrix}\) 
+</div>
+<p>
+Do this once and
           the image looks scrambled. Do it again and it scrambles further. Keep
           going and eventually... it comes all the way back to the original.
           Every single pixel in exactly the right place.
@@ -99,13 +104,28 @@
           precise rule, which means it can always be undone. That's what makes
           it useful for ...dun, dun, duuun... <em> encryption </em>.
         </p>
-        <div class="formula-pill" style="margin: 1.5rem 0">
-          (x′, y′) = ( a₁₁x + a₁₂y , a₂₁x + a₂₂y ) mod N
-        </div>
+
         <p>
-          This formula describes where each pixel at position (x, y) moves to. N by N
+           N by N
           is the number of pixels of the image. You can change the matrix to get a new CAT map and a
           completely different scrambling pattern.
+        </p>
+      </div>
+
+                  <div class="about-section">
+        <h2>What is mod?</h2>
+        <p>
+          The <em>mod</em> part of the formula is short for modulo, it's the
+          remainder after division. For example, 13 mod 10 = 3, because 13 ÷ 10
+          leaves a remainder of 3. You already use modulo every day when you
+          read a clock —> 14:00 is just 14 mod 12 = 2 o'clock.
+        </p>
+        <p>
+          In the Cat Map, mod N keeps all the pixel positions inside the image.
+          Without it, pixels would fly off the edges of the grid. With it, they
+          wrap around, like a game where walking off the right edge brings you
+          back on the left. Mathematicians call this a
+          <em>torus</em>, the same shape as a doughnut.
         </p>
       </div>
 
@@ -123,9 +143,8 @@
     The determinant is a single number that describes what a matrix does to area.
     For a 2×2 matrix:
   </p>
-  <div class="formula-pill" style="margin: 1.5rem 0;">
-    det(A) = a₁₁·a₂₂ − a₁₂·a₂₁
-  </div>
+       <div class="formula-pill" style="margin: 1.5rem 0">
+\[ \det(A) = a_{11} a_{22} - a_{12} a_{21} \]</div>
   <p>
     Think of it this way — if you draw a square on the grid and apply the matrix,
     the determinant tells you how much the area of that square changes:
@@ -136,10 +155,41 @@
     <li>det = 2 means the area doubles. det = 0.5 means it halves.</li>
     <li>det = 0 means the shape collapses completely — the matrix is not invertible and the image cannot be recovered.</li>
   </ul>
+
+            <div class="hta-canvases" style="margin-top:1.5rem;">
+                <div class="hta-col">
+                      <div class="lbl">det = 1:area preserved</div>
+
+    <canvas id="about-det-1" width="280" height="280"></canvas>
+                              <div class="lbl">\(\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \)</div>
+
+  </div>
+                <div class="hta-col">
+                      <div class="lbl">det = −1: flipped</div>
+
+    <canvas id="about-det-neg1" width="280" height="280"></canvas>
+                              <div class="lbl">\( \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\)  </div>
+
+  </div>
+                <div class="hta-col">
+                      <div class="lbl">det = 2: area doubled</div>
+
+    <canvas id="about-det-2" width="280" height="280"></canvas>
+                          <div class="lbl">\(\begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix} \)</div>
+
+  </div>
+                <div class="hta-col">
+                      <div class="lbl">det = 0: collapsed</div>
+
+    <canvas id="about-det-0" width="280" height="280"></canvas>
+                              <div class="lbl">\(\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}\) </div>
+
+  </div>
+</div>
   <p>
     For the Arnold Cat Map we need the determinant to be exactly ±1. This guarantees
     that no pixel is lost or duplicated — every pixel moves to exactly one new
-    position, and the transformation can always be undone. This is why the site
+    position,and the transformation can always be undone. This is why the site
     shows a warning when you enter a matrix with a different determinant.
   </p>
 </div>
@@ -152,13 +202,12 @@
     found by solving the characteristic equation:
   </p>
   <div class="formula-pill" style="margin: 1.5rem 0;">
-    λ² − (a₁₁ + a₂₂)·λ + det(A) = 0
-  </div>
+\( \lambda^2 - (a_{11} + a_{22})\lambda + \det(A) = 0 \)  </div>
   <p>
     Using the quadratic formula this gives:
   </p>
   <div class="formula-pill" style="margin: 1.5rem 0;">
-    λ = ( (a₁₁ + a₂₂) ± √( (a₁₁ + a₂₂)² − 4·det(A) ) ) / 2
+\( \lambda = \frac{(a_{11} + a_{22}) \pm \sqrt{(a_{11} + a_{22})^2 - 4\det(A)}}{2} \)
   </div>
   <p>
     For the Cat Map to produce chaotic scrambling, the eigenvalues need to
@@ -172,30 +221,13 @@
     <li>If either eigenvalue equals exactly 1, there is no stretching in that direction,the scrambling is weak or non-existent.</li>
   </ul>
   <p>
-    For the classic matrix A = [[1, 1], [1, 0]], the eigenvalues are
-    (1 ± √5) / 2 — approximately <em>1.618</em> and <em>−0.618</em>.
+    For the classic matrix \(A = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}\), the eigenvalues are
+    \( \frac{1 \pm \sqrt{5}}{2} \) approximately <em>1.618</em> and <em>−0.618</em>.
     These are the golden ratio and its conjugate. One is greater than 1,
     one is less than 1 in absolute value, which is exactly what produces
     the strong chaotic scrambling the Cat Map is known for.
   </p>
 </div>
-
-            <div class="about-section">
-        <h2>What is mod?</h2>
-        <p>
-          The <em>mod</em> part of the formula is short for modulo — it's the
-          remainder after division. For example, 13 mod 10 = 3, because 13 ÷ 10
-          leaves a remainder of 3. You already use modulo every day when you
-          read a clock —> 14:00 is just 14 mod 12 = 2 o'clock.
-        </p>
-        <p>
-          In the Cat Map, mod N keeps all the pixel positions inside the image.
-          Without it, pixels would fly off the edges of the grid. With it, they
-          wrap around, like a game where walking off the right edge brings you
-          back on the left. Mathematicians call this a
-          <em>torus</em>, the same shape as a doughnut.
-        </p>
-      </div>
 
       <div class="about-section">
         <h2>Why does it always come back?</h2>
@@ -223,7 +255,7 @@
         <div class="about-section">
         <h2>Other Questions to Explore</h2>
             <ul class="about-list">
-                <li>How many iterations does it take for the image to return if its size is 16 by 16 pixels?  What about for 17 by 17 pixel image?</li>
+                <li>How many iterations does it take for the image to return if its size is 16 by 16 pixels?  What about for a 17 by 17 pixel image?</li>
                 <li>Is there a relationship between the pixel size and the period (the number of iterations for the image to come back)?</li>
                 <li>For which pixel sizes does the image appear upside down?</li>
                 <li>Do you notice any other patterns appearing in the images as you animate through them? </li>

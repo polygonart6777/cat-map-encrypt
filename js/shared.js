@@ -15,6 +15,12 @@
  * @param {number} a22
  * @returns {ImageData} transformed copy
  */
+
+const HTA_N = 10;
+const HTA_LMIN = -5;
+const HTA_LMAX = 20;
+const HTA_LRANGE = 25;
+
 function applyArnoldTransform(imageData, a11, a12, a21, a22) {
   const N = imageData.width;
   const src = imageData.data;

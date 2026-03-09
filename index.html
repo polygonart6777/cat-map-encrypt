@@ -14,6 +14,18 @@
       src="https://cloud.umami.is/script.js"
       data-website-id="3da82827-4c47-4d6d-8820-0413198c1312"
     ></script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"]],
+          displayMath: [["\\[", "\\]"]],
+        },
+      };
+    </script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+    ></script>
   </head>
   <body>
     <!-- ── NAVIGATION ── -->
@@ -80,6 +92,7 @@
 
         await loadPage("about");
         initAboutDiagram();
+        if (window.MathJax) MathJax.typesetPromise();
 
         await loadPage("qrcode");
         initQrCode();
