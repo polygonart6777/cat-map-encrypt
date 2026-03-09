@@ -15,7 +15,7 @@ function showPage(id, btn) {
   btn.classList.add("active");
   if (id === "hta" && !htaInited) initHTA();
 
-  // Close the mobile menu after a tab is selected
+  trackPage(id);
   closeNav();
 }
 
@@ -33,4 +33,14 @@ function closeNav() {
   links.classList.remove("open");
   hamburger.classList.remove("open");
   hamburger.setAttribute("aria-expanded", "false");
+}
+
+function trackPage(id) {
+  if (typeof umami === "undefined") return;
+  const names = {
+    animation: "Animation",
+    about: "About",
+    qrcode: "QR Code",
+  };
+  umami.track({ url: "/" + id, title: names[id] });
 }

@@ -73,6 +73,9 @@ function animOnSizeChange() {
 function animOnUpload(input) {
   const file = input.files[0];
   if (!file) return;
+  if (typeof umami !== "undefined") {
+    umami.track("Upload Image", { page: "iterations" });
+  }
   animN = Math.min(
     500,
     Math.max(2, parseInt(document.getElementById("anim-size").value) || 16),
@@ -269,6 +272,9 @@ function animUpdateUI() {
 }
 
 function animSaveFrame() {
+  if (typeof umami !== "undefined") {
+    umami.track("Save Frame", { iteration: animIterations, size: animN });
+  }
   const link = document.createElement("a");
   const filename = animFilename
     ? animFilename.replace(/\.[^/.]+$/, "")
