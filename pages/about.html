@@ -11,6 +11,47 @@
         </p>
       </div>
       <div class="wrap">
+         <div class="about-section">
+          <h2>What is encryption?</h2>
+          <p>
+            You've probably heard of encryption before, it's how your messages,
+            passwords, and photos are kept private online. Encryption takes
+            something readable and scrambles it so that only someone with the
+            right key can unscramble it.
+          </p>
+          <p>
+            Most encryption works with text or numbers. But what about images?
+            Can we scramble a picture the same way? The Arnold Cat Map is one
+            answer to that question and it uses a surprising amount of
+            interesting mathematics to do it.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h2>How would you use this to encrypt an image?</h2>
+        <p>Here's a simple encryption scheme using the Cat Map:</p>
+        <ol class="about-steps">
+          <li>Choose a matrix A — this is your secret key. Keep it private.</li>
+          <li>
+            Apply the Cat Map to your image a chosen number of times — say, 7
+            steps. This is the encrypted image. It looks like noise.
+          </li>
+          <li>
+            Send the scrambled image to your friend. Without the key, they can't
+            recover it.
+          </li>
+          <li>
+            Your friend applies the same Cat Map the remaining steps until the
+            period is complete and the original image reappears.
+          </li>
+        </ol>
+        <p style="margin-top: 1.2rem">
+          In practice, real image encryption uses more sophisticated techniques,
+          but the Cat Map is used as a component in several modern encryption
+          algorithms because of its strong scrambling properties.
+        </p>
+      </div>
         <div class="about-section">
             <h2>How the transform works</h2>
             <p>Each step of the Cat Map happens in two or three stages:</p>
@@ -75,8 +116,6 @@
           so that the matrix should have determinant +1 or -1 and none of 
           its eigenvalues should have length 1.</p>
       </div>
-
-      <!-- ADD after the mod section -->
 
 <div class="about-section">
   <h2>What is a determinant?</h2>
@@ -158,48 +197,6 @@
         </p>
       </div>
 
-        <div class="about-section">
-          <h2>What is encryption?</h2>
-          <p>
-            You've probably heard of encryption before, it's how your messages,
-            passwords, and photos are kept private online. Encryption takes
-            something readable and scrambles it so that only someone with the
-            right key can unscramble it.
-          </p>
-          <p>
-            Most encryption works with text or numbers. But what about images?
-            Can we scramble a picture the same way? The Arnold Cat Map is one
-            answer to that question and it uses a surprising amount of
-            interesting mathematics to do it.
-          </p>
-        </div>
-      </div>
-
-      <div class="about-section">
-        <h2>How would you use this to encrypt an image?</h2>
-        <p>Here's a simple encryption scheme using the Cat Map:</p>
-        <ol class="about-steps">
-          <li>Choose a matrix A — this is your secret key. Keep it private.</li>
-          <li>
-            Apply the Cat Map to your image a chosen number of times — say, 7
-            steps. This is the encrypted image. It looks like noise.
-          </li>
-          <li>
-            Send the scrambled image to your friend. Without the key, they can't
-            recover it.
-          </li>
-          <li>
-            Your friend applies the same Cat Map the remaining steps until the
-            period is complete and the original image reappears.
-          </li>
-        </ol>
-        <p style="margin-top: 1.2rem">
-          In practice, real image encryption uses more sophisticated techniques,
-          but the Cat Map is used as a component in several modern encryption
-          algorithms because of its strong scrambling properties.
-        </p>
-      </div>
-
       <div class="about-section">
         <h2>Why does it always come back?</h2>
         <p>
@@ -226,7 +223,7 @@
         <div class="about-section">
         <h2>Other Questions to Explore</h2>
             <ul class="about-list">
-                <li>How many iterations does it take for the image if its size is 16 by 16 pixels?  What about for 17 by 17 pixel image?</li>
+                <li>How many iterations does it take for the image to return if its size is 16 by 16 pixels?  What about for 17 by 17 pixel image?</li>
                 <li>Is there a relationship between the pixel size and the period (the number of iterations for the image to come back)?</li>
                 <li>For which pixel sizes does the image appear upside down?</li>
                 <li>Do you notice any other patterns appearing in the images as you animate through them? </li>
