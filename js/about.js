@@ -32,7 +32,7 @@ function initAboutDiagram() {
     H = 280;
 
   // Derived point sets from the shared original
-  const flipped = aboutPoints.map((p) => ({ x: p.y, y: p.x, idx: p.idx }));
+  const reflected = aboutPoints.map((p) => ({ x: p.y, y: p.x, idx: p.idx }));
   const linear = aboutPoints; // drawn in linear mode — no transform needed
   const after = aboutPoints.map((p) => ({
     x: (((p.x + p.y) % HTA_N) + HTA_N) % HTA_N,
@@ -42,7 +42,7 @@ function initAboutDiagram() {
 
   [
     { id: "about-hta-before", points: aboutPoints, isLinear: false },
-    { id: "about-hta-flip", points: flipped, isLinear: false },
+    { id: "about-hta-reflect", points: reflected, isLinear: false },
     { id: "about-hta-linear", points: linear, isLinear: true },
     { id: "about-hta-after", points: after, isLinear: false },
   ].forEach(({ id, points, isLinear }) => {
@@ -102,7 +102,7 @@ function initDetVisuals() {
   // det = 1  — identity, discrete grid style
   drawDetCanvas("about-det-1", 1, 0, 0, 1, false);
 
-  // det = -1 — flip, discrete grid style
+  // det = -1 — reflect, discrete grid style
   drawDetCanvas("about-det-neg1", 0, 1, 1, 0, false);
 
   // det = 2  — linear style showing points outside red box

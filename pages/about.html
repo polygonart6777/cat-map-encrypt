@@ -56,7 +56,7 @@
             <h2>How the transform works</h2>
             <p>Each step of the Cat Map happens in two or three stages:</p>
                 <ul class="about-list">
-                <li>If the determinant is −1, there will be a <em>flip across the diagonal</em>.</li>
+                <li>If the determinant is −1, there will be a <em>reflect across the diagonal</em>.</li>
                 <li>The matrix <em>shears</em> the grid, taking points outside the original square.</li>
                 <li>The <em>modulo</em> folds everything back in.</li>
                 </ul>
@@ -71,8 +71,8 @@
                     <canvas id="about-hta-before" width="280" height="280"></canvas>
                 </div>
                 <div class="hta-col">
-                    <div class="lbl">Flip Across Diagonal</div>
-                    <canvas id="about-hta-flip" width="280" height="280"></canvas>
+                    <div class="lbl">Reflect Across Diagonal</div>
+                    <canvas id="about-hta-reflect" width="280" height="280"></canvas>
                 </div>
                 <div class="hta-col">
                     <div class="lbl">Shear</div>
@@ -151,7 +151,7 @@ Do this once and
   </p>
   <ul class="about-list">
     <li>det = 1 means the area stays exactly the same — the transformation is <em>area-preserving</em>.</li>
-    <li>det = −1 means the area stays the same but the shape gets <em>flipped</em> — reflected across the diagonal.</li>
+    <li>det = −1 means the area stays the same but the shape gets <em>reflected</em> across the diagonal.</li>
     <li>det = 2 means the area doubles. det = 0.5 means it halves.</li>
     <li>det = 0 means the shape collapses completely — the matrix is not invertible and the image cannot be recovered.</li>
   </ul>
@@ -165,7 +165,7 @@ Do this once and
 
   </div>
                 <div class="hta-col">
-                      <div class="lbl">det = −1: flipped</div>
+                      <div class="lbl">det = −1: reflected</div>
 
     <canvas id="about-det-neg1" width="280" height="280"></canvas>
                               <div class="lbl">\( \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\)  </div>

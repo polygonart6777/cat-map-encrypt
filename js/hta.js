@@ -134,7 +134,7 @@ function htaDrawPoints(ctx, W, H, points, isLinear) {
         ctx.strokeRect(cx - 6, cy - 6, 12, 12);
       }
     } else {
-      // Fill the entire grid cell (y-axis flipped for canvas coords)
+      // Fill the entire grid cell (y-axis reflected for canvas coords)
       const cx = p.x * cell;
       const cy = (HTA_N - 1 - p.y) * cell;
       ctx.fillRect(cx, cy, cell, cell);
