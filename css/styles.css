@@ -883,7 +883,7 @@ input[type="number"].matrix-invalid:focus {
 .about-section p {
   color: var(--muted);
   font-size: 1.5rem;
-  line-height: 1.9;
+  line-height: 1;
   margin-bottom: 0.75rem;
   width: 100%;
 }
@@ -956,7 +956,7 @@ input[type="number"].matrix-invalid:focus {
 .about-steps li {
   color: var(--muted);
   font-size: 1.5rem;
-  line-height: 1.9;
+  line-height: 1;
   padding-left: 0.4rem;
 }
 
@@ -974,7 +974,7 @@ input[type="number"].matrix-invalid:focus {
 .about-list li {
   color: var(--muted);
   font-size: 1.5rem;
-  line-height: 1.9;
+  line-height: 1;
   padding-left: 0.4rem;
   margin-bottom: 0.3rem;
 }
