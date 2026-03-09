@@ -1035,3 +1035,30 @@ input[type="number"].matrix-invalid:focus {
   flex-shrink: 0;
   color: var(--muted);
 }
+
+.qr-copy-btn {
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.18s;
+}
+
+.qr-copy-btn:hover {
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+
+.qr-copy-btn.copied {
+  border-color: var(--accent2);
+  color: var(--accent2);
+  background: rgba(59, 191, 191, 0.08);
+}

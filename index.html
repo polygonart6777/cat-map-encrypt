@@ -51,6 +51,7 @@
     <script src="js/about.js"></script>
     <script src="js/hta.js"></script>
     <script src="js/nav.js"></script>
+    <script src="js/qrcode.js"></script>
 
     <script>
       async function loadPage(id) {
@@ -79,7 +80,9 @@
 
         await loadPage("about");
         initAboutDiagram();
+
         await loadPage("qrcode");
+        initQrCode();
       }
 
       document.addEventListener("DOMContentLoaded", initApp);

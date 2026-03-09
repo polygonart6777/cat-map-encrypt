@@ -30,18 +30,16 @@
           <span id="qr-url-text"
             >https://polygonart6777.github.io/cat-map-encrypt/</span
           >
+          <button
+            class="qr-copy-btn"
+            onclick="copyQrUrl()"
+            aria-label="Copy URL to clipboard"
+            id="qr-copy-btn"
+          >
+            <i class="fa-solid fa-copy"></i>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  document.getElementById("qr-url-text").textContent =
-    window.location.href.replace(/\/$/, "");
-</script>
-
-<script>
-  document.getElementById("qr-url-text").textContent =
-    window.location.href.replace(/\/$/, "");
-</script>
