@@ -5,9 +5,9 @@
   --surface: #ffffff;
   --surface2: #d0f0f0;
   --border: #a8dede;
-  --accent: #c05a38; /* terracotta — cat's fur */
+  --accent: #c05a38;
   --accent2: #2a8f8f;
-  --accent3: #e8906a; /* warm orange — cat's face */
+  --accent3: #e8906a;
   --text: #2a1f14;
   --muted: #3d6060;
   --grid-line: rgba(59, 191, 191, 0.1);
@@ -694,7 +694,7 @@ input[type="number"].matrix-invalid:focus {
   margin-top: 0.7rem;
 }
 .progress-track {
-  height: 3px;
+  height: 10px;
   background: var(--border);
   border-radius: 2px;
   overflow: hidden;
@@ -711,6 +711,40 @@ input[type="number"].matrix-invalid:focus {
   margin-top: 0.35rem;
   font-size: 1.5rem;
   color: var(--muted);
+}
+
+.speed-progress-track {
+  height: 10px;
+  width: 100%;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.speed-progress-fill {
+  height: 10px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent3), var(--accent));
+  width: 0%;
+  transition:
+    width 0.2s ease,
+    background 0.2s ease;
+  display: block;
+}
+
+.speed-progress-fill.at-limit {
+  background: var(--accent);
+}
+
+.speed-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.25rem;
 }
 
 #anim-size {

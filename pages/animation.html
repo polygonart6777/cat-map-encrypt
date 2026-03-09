@@ -18,7 +18,7 @@
           <div class="panel-head"><span class="dot"></span>Image</div>
           <div class="sidebar-body">
             <div>
-              <label class="field-label">Pixel Size</label>
+              <label class="field-label">Pixel Size (max 500)</label>
               <input
                 type="number"
                 id="anim-size"
@@ -51,8 +51,6 @@
           steps
         </div>
       </div>
-
-      <!-- Centre: canvas + progress bar -->
       <div>
         <div class="canvas-wrap">
           <canvas
@@ -83,13 +81,11 @@
             <div class="progress-fill" id="anim-progress"></div>
           </div>
           <div class="progress-labels">
-            <span>n = 0</span>
+            <span>n = <span class="n" id="anim-n-lbl">0</span></span>
             <span id="anim-period-lbl">period = ?</span>
           </div>
         </div>
       </div>
-
-      <!-- Right: matrix + playback panels -->
       <div class="anim-sidebar">
         <div class="panel">
           <div class="panel-head">
@@ -106,6 +102,10 @@
               >
                 −
               </button>
+
+              <div class="speed-progress-track">
+                <div class="speed-progress-fill" id="speed-progress"></div>
+              </div>
               <button
                 class="speed-btn"
                 onclick="changeTimestep(-50)"

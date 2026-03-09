@@ -24,6 +24,7 @@ function initAnim() {
   animCanvas = document.getElementById("anim-canvas");
   animCtx = animCanvas.getContext("2d");
   animN = 16;
+
   animLoadDefault();
 }
 
@@ -44,6 +45,9 @@ function animLoadDefault() {
     animCtx.putImageData(d, 0, 0);
     animDetectPeriod();
     animUpdateUI();
+    updateSpeedProgress();
+
+    console.log(document.getElementById("speed-progress"));
   });
 }
 
@@ -252,11 +256,19 @@ function animStop() {
 
 function changeTimestep(delta) {
   currentTimestep = Math.min(1000, Math.max(50, currentTimestep + delta));
-  document.getElementById("speed-lbl").textContent = currentTimestep + "ms";
+  updateSpeedProgress();
   if (animPlaying) {
     animStop();
     animPlay();
   }
+}
+
+function updateSpeedProgress() {
+  const fill = document.getElementById("speed-progress");
+  if (!fill) return;
+  const pct = ((1000 - currentTimestep) / (1000 - 50)) * 100;
+  fill.style.width = pct + "%";
+  fill.classList.toggle("at-limit", currentTimestep === 50);
 }
 
 /* ── UI sync ── */
