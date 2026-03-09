@@ -97,22 +97,19 @@
           </div>
           <div class="sidebar-body">
             <div class="speed-stepper">
-              <label class="field-label" style="font-size: 1rem"
-                >Timestep:
-              </label>
+              <label class="field-label" style="font-size: 1rem">Speed: </label>
 
               <button
                 class="speed-btn"
-                onclick="changeTimestep(-50)"
-                aria-label="Decrease timestep"
+                onclick="changeTimestep(50)"
+                aria-label="Decrease speed"
               >
                 −
               </button>
-              <span id="speed-lbl">300ms</span>
               <button
                 class="speed-btn"
-                onclick="changeTimestep(50)"
-                aria-label="Increase timestep"
+                onclick="changeTimestep(-50)"
+                aria-label="Increase speed"
               >
                 +
               </button>
