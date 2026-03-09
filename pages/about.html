@@ -147,7 +147,7 @@
           The <em>mod</em> part of the formula is short for modulo — it's the
           remainder after division. For example, 13 mod 10 = 3, because 13 ÷ 10
           leaves a remainder of 3. You already use modulo every day when you
-          read a clock — 14:00 is just 14 mod 12 = 2 o'clock.
+          read a clock —> 14:00 is just 14 mod 12 = 2 o'clock.
         </p>
         <p>
           In the Cat Map, mod N keeps all the pixel positions inside the image.
@@ -190,7 +190,7 @@
           </li>
           <li>
             Your friend applies the same Cat Map the remaining steps until the
-            period is complete — and the original image reappears.
+            period is complete and the original image reappears.
           </li>
         </ol>
         <p style="margin-top: 1.2rem">
@@ -212,64 +212,25 @@
           The reason is that the image is a finite grid — for example 15×15 =
           225 pixels. Each pixel can only be in one of 225 positions. So there
           are only a limited number of ways to arrange them. Eventually the map
-          has to repeat itself, and because it follows a strict rule, it must
+          has to repeat itself, and because it follows a strict rule (where the determinant is +/−1), it must
           come back to the very beginning.
         </p>
         <p>
           The number of steps it takes to come back is called the
           <em>period</em>. For the classic Cat Map on a 15×15 grid, the period
           is 40. On a 16×16 grid it is only 12. The period can vary wildly
-          depending on the grid size — some sizes take hundreds of steps to
+          depending on the grid size, some sizes take hundreds of steps to
           return.
         </p>
         </div>
-
         <div class="about-section">
-          <h2>Who invented it?</h2>
-          <p>
-            The map was introduced by the Russian mathematician Vladimir Arnold
-            in the 1960s. He demonstrated it using a picture of a cat — which is
-            where the name comes from. Arnold made major contributions to
-            mathematics and physics throughout his career, and the Cat Map
-            remains one of the most well-known examples of a chaotic dynamical
-            system that is simple enough to understand but rich enough to be
-            genuinely interesting.
-          </p>
-        </div>
-
-        <div class="about-section">
-          <h2>Explore the map</h2>
-          <div class="about-cards">
-            <div class="about-card">
-              <div class="about-card-title">
-                <i class="fa-solid fa-play"></i> Animation
-              </div>
-              <p>
-                Watch the scrambling happen in real time. Try uploading your own
-                photo. Try changing the matrix and see how the period changes.
-              </p>
-            </div>
-            <div class="about-card">
-              <div class="about-card-title">
-                <i class="fa-solid fa-grid"></i> All Iterations
-              </div>
-              <p>
-                See every step laid out at once. Can you spot the moment it
-                starts to look like noise? Can you find the step where it comes
-                back?
-              </p>
-            </div>
-            <div class="about-card">
-              <div class="about-card-title">
-                <i class="fa-solid fa-arrow-right"></i> Step-by-Step
-              </div>
-              <p>
-                See exactly where each colored square goes at each step. Watch
-                the stretching happen before the modulo folds everything back
-                in.
-              </p>
-            </div>
-          </div>
+        <h2>Other Questions to Explore</h2>
+            <ul class="about-list">
+                <li>How many iterations does it take for the image if its size is 16 by 16 pixels?  What about for 17 by 17 pixel image?</li>
+                <li>Is there a relationship between the pixel size and the period (the number of iterations for the image to come back)?</li>
+                <li>For which pixel sizes does the image appear upside down?</li>
+                <li>Do you notice any other patterns appearing in the images as you animate through them? </li>
+            </ul>
         </div>
 
         <div class="about-section">
@@ -309,6 +270,26 @@
                 rel="noopener"
               >
                 Modular Arithmetic — Wikipedia
+              </a>
+            </li>
+
+              <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Determinant"
+                target="_blank"
+                rel="noopener"
+              >
+                Determinant — Wikipedia
+              </a>
+            </li>
+
+                 <li>
+              <a
+                href="https://en.wikipedia.org/wiki/eigenvalues_and_eigenvectors"
+                target="_blank"
+                rel="noopener"
+              >
+                Eigenvalues— Wikipedia
               </a>
             </li>
           </ul>
