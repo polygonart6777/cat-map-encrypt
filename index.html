@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/15by15cat.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/16by16cat.png"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arnold Cat Map</title>
@@ -52,6 +64,9 @@
         <button class="nav-tab" onclick="showPage('qrcode', this)">
           QR Code
         </button>
+        <button class="nav-tab" onclick="showPage('contact', this)">
+          Contact
+        </button>
       </div>
     </nav>
 
@@ -97,6 +112,8 @@
 
         await loadPage("qrcode");
         initQrCode();
+
+        await loadPage("contact");
       }
 
       document.addEventListener("DOMContentLoaded", initApp);

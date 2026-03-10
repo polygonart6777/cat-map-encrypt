@@ -68,7 +68,7 @@ function dataEqual(a, b) {
  * Falls back to a solid teal fill if the image cannot be loaded
  * (e.g. when opening index.html directly via file://).
  *
- * @param {number} N  — canvas width & height in pixels
+ * @param {number} N
  * @returns {Promise<ImageData>}
  */
 function makeDefaultImage(N) {
@@ -80,13 +80,13 @@ function makeDefaultImage(N) {
       c.width = N;
       c.height = N;
       const ctx = c.getContext("2d");
-      ctx.imageSmoothingEnabled = false; // keep pixel art crisp
+      ctx.imageSmoothingEnabled = false;
       ctx.drawImage(img, 0, 0, N, N);
       resolve(ctx.getImageData(0, 0, N, N));
     };
 
     img.onerror = () => {
-      console.warn("Could not load assets/15by15.png — using teal fallback.");
+      console.warn("Could not load assets/16by16.png — using teal fallback.");
       const c = document.createElement("canvas");
       c.width = N;
       c.height = N;

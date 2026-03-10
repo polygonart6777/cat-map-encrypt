@@ -46,8 +46,6 @@ function animLoadDefault() {
     animDetectPeriod();
     animUpdateUI();
     updateSpeedProgress();
-
-    console.log(document.getElementById("speed-progress"));
   });
 }
 
