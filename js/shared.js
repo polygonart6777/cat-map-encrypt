@@ -28,8 +28,8 @@ function applyArnoldTransform(imageData, a11, a12, a21, a22) {
 
   for (let y = 0; y < N; y++) {
     for (let x = 0; x < N; x++) {
-      const nx = (a11 * x + a12 * y) % N;
-      const ny = (a21 * x + a22 * y) % N;
+      const nx = (((a11 * x + a12 * y) % N) + N) % N;
+      const ny = (((a21 * x + a22 * y) % N) + N) % N;
       const si = (y * N + x) * 4;
       const di = (ny * N + nx) * 4;
       dst[di] = src[si];

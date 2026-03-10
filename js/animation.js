@@ -122,20 +122,14 @@ function animOnUpload(input) {
 /* ── Period detection ── */
 
 function animDetectPeriod() {
-  if (!animOrigData) return;
-
+  if (!animOrigData || animN > 500) return;
   const { a11, a12, a21, a22 } = animGetMatrix();
-  let cur = new ImageData(
-    new Uint8ClampedArray(animOrigData.data),
-    animN,
-    animN,
-  );
-  const orig = animOrigData.data;
 
   animPeriod = null;
+  const orig = animOrigData.data;
+  let cur = new ImageData(new Uint8ClampedArray(orig), animN, animN);
+  const limit = 1500;
 
-  // Limit search to avoid freezing on large images
-  const limit = animN <= 500 ? 1500 : 300;
   for (let i = 1; i <= limit; i++) {
     cur = applyArnoldTransform(cur, a11, a12, a21, a22);
     if (dataEqual(cur.data, orig)) {
@@ -149,12 +143,12 @@ function animDetectPeriod() {
   const lbl = document.getElementById("anim-period-lbl");
 
   if (animPeriod) {
-    info.style.display = "flex";
-    val.textContent = animPeriod;
-    lbl.textContent = "period = " + animPeriod;
+    if (info) info.style.display = "flex";
+    if (val) val.textContent = animPeriod;
+    if (lbl) lbl.textContent = "period = " + animPeriod;
   } else {
-    info.style.display = "none";
-    lbl.textContent = "period = >limit";
+    if (info) info.style.display = "none";
+    if (lbl) lbl.textContent = "period > limit";
   }
 }
 
@@ -273,6 +267,8 @@ function updateSpeedProgress() {
 
 function animUpdateUI() {
   document.getElementById("anim-n").textContent = animIterations;
+  document.getElementById("anim-n-lbl").textContent = animIterations;
+
   document.getElementById("anim-canvas-desc").textContent =
     "Iteration " + animIterations + (animPeriod ? " of " + animPeriod : "");
   if (animPeriod) {
@@ -282,16 +278,27 @@ function animUpdateUI() {
 }
 
 function animSaveFrame() {
+  if (!confirm("Save this frame as a PNG image?")) return;
+
   if (typeof umami !== "undefined") {
     umami.track("Save Frame", { iteration: animIterations, size: animN });
   }
-  const link = document.createElement("a");
-  const filename = animFilename
-    ? animFilename.replace(/\.[^/.]+$/, "")
+  const name = animFilename
+    ? animFilename.replace(/\.[^.]+$/, "")
     : "arnold-cat-map";
-  link.download = `${filename}-iteration-${animIterations}.png`;
+  const link = document.createElement("a");
+  link.download = `${name}-n-${animIterations}.png`;
   link.href = animCanvas.toDataURL("image/png");
   link.click();
+  const btn = document.querySelector(".canvas-download");
+  if (btn) {
+    btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+    btn.classList.add("saved");
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fa-solid fa-download"></i>';
+      btn.classList.remove("saved");
+    }, 2000);
+  }
 }
 
 function animOnMatrixChange() {
@@ -309,6 +316,9 @@ function animOnMatrixChange() {
   animHistory = [
     new ImageData(new Uint8ClampedArray(animOrigData.data), animN, animN),
   ];
-  animDetectPeriod();
-  animUpdateUI();
+
+  if (a11 != null && a12 != null && a21 != null && a22 != null) {
+    animDetectPeriod();
+    animUpdateUI();
+  }
 }

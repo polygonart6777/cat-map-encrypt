@@ -54,6 +54,7 @@ function initAboutDiagram() {
   });
 
   initDetVisuals();
+  initEigenVisuals();
 }
 
 // ── Determinant visuals ───────────────────────────────────────
@@ -110,4 +111,33 @@ function initDetVisuals() {
 
   // det = 0  — linear style showing collapse
   drawDetCanvas("about-det-0", 1, 0, 0, 0, true);
+}
+
+function initEigenVisuals() {
+  const W = 280,
+    H = 280;
+
+  function drawEigenCanvas(id, a11, a12, a21, a22) {
+    const ctx = getCtx(id);
+    if (!ctx) return;
+    clearCanvas(ctx, W, H);
+    htaDrawGrid(ctx, W, H, true);
+    drawLinearPoints(ctx, W, H, a11, a12, a21, a22);
+  }
+
+  // Both eigenvalues > 1 — expands in all directions
+  // [[4,1],[1,2]] λ ≈ 4.41, 1.59
+  drawEigenCanvas("about-eigen-both-gt", 4, 1, 1, 2);
+
+  // Both eigenvalues magnitude = 1 — rotation, no stretching
+  // [[0,1],[-1,1]] complex eigenvalues with |λ| = 1
+  drawEigenCanvas("about-eigen-both-lt", 0, 1, -1, 1);
+
+  // One eigenvalue = 1 — shear, no area change but no chaos
+  // [[1,1],[0,1]] λ = 1, 1
+  drawEigenCanvas("about-eigen-length-1", 1, 1, 0, 1);
+
+  // One > 1, one < 1 — classic Cat Map chaos
+  // [[1,1],[1,0]] λ ≈ 1.618, -0.618
+  drawEigenCanvas("about-eigen-straddle", 1, 1, 1, 0);
 }

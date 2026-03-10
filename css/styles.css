@@ -548,6 +548,12 @@ input[type="number"].matrix-invalid:focus {
   color: #fff;
 }
 
+.canvas-download.saved {
+  background: var(--accent2);
+  border-color: var(--accent2);
+  color: #fff;
+}
+
 @media (max-width: 720px) {
   .canvas-download {
     width: 36px;
