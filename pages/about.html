@@ -103,11 +103,16 @@
       according to a mathematical rule. This formula describes where each pixel
       at position (x, y) moves to.
     </p>
-    <div class="formula-pill" style="margin: 1.5rem 0">
-      \( \begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} a_{11} &
-      a_{12} \\ a_{21} & a_{22} \end{pmatrix} \begin{pmatrix} x \\ y
-      \end{pmatrix} \mod N = \begin{pmatrix} a_{11} x + a_{12} y \mod N \\
-      a_{21} x + a_{22} y \mod N \end{pmatrix}\)
+    <div class="formula-pill formula-pill-break" style="margin: 1.5rem 0">
+      <div class="math-scroll">
+        \( \begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} a_{11} &
+        a_{12} \\ a_{21} & a_{22} \end{pmatrix} \begin{pmatrix} x \\ y
+        \end{pmatrix} \mod N \)
+      </div>
+      <div class="math-scroll">
+        \( = \begin{pmatrix} a_{11} x + a_{12} y \mod N \\ a_{21} x + a_{22} y
+        \mod N \end{pmatrix} \)
+      </div>
     </div>
     <p>
       Do this once and the image looks scrambled. Do it again and it scrambles
@@ -179,7 +184,7 @@
         invertible and the image cannot be recovered.
       </li>
     </ul>
-    <div class="hta-canvases" style="margin-top: 1.5rem">
+    <div class="hta-canvases" style="margin: 1.5rem 0.5rem">
       <div class="hta-col">
         <div class="lbl">det = 1:area preserved</div>
         <canvas id="about-det-1" width="280" height="280"></canvas>
@@ -278,24 +283,6 @@
       40. On a 16×16 grid it is only 12. The period can vary wildly depending on
       the grid size, some sizes take hundreds of steps to return.
     </p>
-  </div>
-  <div class="about-section">
-    <h2>Other Questions to Explore</h2>
-    <ul class="about-list">
-      <li>
-        How many iterations does it take for the image to return if its size is
-        16 by 16 pixels? What about for a 17 by 17 pixel image?
-      </li>
-      <li>
-        Is there a relationship between the pixel size and the period (the
-        number of iterations for the image to come back)?
-      </li>
-      <li>For which pixel sizes does the image appear upside down?</li>
-      <li>
-        Do you notice any other patterns appearing in the images as you animate
-        through them?
-      </li>
-    </ul>
   </div>
 
   <div class="about-section">

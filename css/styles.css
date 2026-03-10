@@ -239,6 +239,7 @@ input[type="number"] {
   font-size: 3rem;
   color: var(--accent2);
   margin-right: auto;
+  line-height: 1.15;
 }
 
 .hero-logo span {
@@ -268,6 +269,20 @@ input[type="number"] {
 .formula-pill span {
   color: var(--muted);
   font-size: 1.5rem;
+}
+
+.formula-pill-break {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* On mobile — stack into two lines at the equals sign */
+@media (max-width: 560px) {
+  .formula-pill-break {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
 
 /* ── FORM ELEMENTS ── */
@@ -649,7 +664,7 @@ input[type="number"].matrix-invalid:focus {
 #page-animation .wrap {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 2rem 5rem;
+  padding: 0 2rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1166,6 +1181,15 @@ input[type="number"].matrix-invalid:focus {
   transition: all 0.18s;
 }
 
+.outside-link {
+  background: none;
+  color: var(--muted);
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
 .contact-image-wrap {
   width: 240px;
   height: 240px;
@@ -1179,4 +1203,30 @@ input[type="number"].matrix-invalid:focus {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.MJX-TEX,
+mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+mjx-container[display="true"] {
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.math-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 0.5rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 560px) {
+  mjx-container {
+    font-size: 85% !important;
+  }
 }
