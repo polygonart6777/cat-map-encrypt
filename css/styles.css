@@ -1174,7 +1174,7 @@ input[type="number"].matrix-invalid:focus {
 .contact-image-wrap {
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: row !important;
   overflow: hidden;
 }
 
@@ -1189,11 +1189,9 @@ input[type="number"].matrix-invalid:focus {
   margin: 0.5rem;
 }
 
-@media (max-width: 768px) {
-  .contact-image-wrap {
-    flex-direction: column;
-    align-items: center;
-  }
+.contact-image-row {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .MJX-TEX,
