@@ -130,6 +130,28 @@
       get a new CAT map and a completely different scrambling pattern.
     </p>
   </div>
+
+  <div class="about-section">
+    <h2>Why does it always come back?</h2>
+    <p>
+      Here's the surprising part. No matter what image you start with, and no
+      matter what matrix you choose, the image always returns to its exact
+      original state after enough steps. Always.
+    </p>
+    <p>
+      The reason is that the image is a finite grid, for example 15×15 = 225
+      pixels. Each pixel can only be in one of 225 positions. So there are only
+      a limited number of ways to arrange them. Eventually the map has to repeat
+      itself, and because it follows a strict rule (where the determinant is
+      +/−1), it must come back to the very beginning.
+    </p>
+    <p>
+      The number of steps it takes to come back is called the
+      <em>period</em>. For the classic Cat Map on a 15×15 grid, the period is
+      40. On a 16×16 grid it is only 24. The period can vary wildly depending on
+      the grid size, some sizes take hundreds of steps to return.
+    </p>
+  </div>
   <div class="about-section">
     <h2>What is mod?</h2>
     <p>
@@ -222,6 +244,14 @@
   <div class="about-section">
     <h2>What are eigenvalues?</h2>
     <p>
+      For the classic matrix \(A = \begin{pmatrix} 1 & 1 \\ 1 & 0
+      \end{pmatrix}\), the eigenvalues are \( \frac{1 \pm \sqrt{5}}{2} \)
+      approximately <em>1.618</em> and <em>−0.618</em>. These are the golden
+      ratio and its negative reciprocal. One is greater than 1, one is less than
+      1 in absolute value, which is exactly what produces the strong chaotic
+      scrambling the Cat Map is known for.
+    </p>
+    <p>
       Eigenvalues describe the directions in which a matrix purely stretches or
       compresses, without rotating. For a 2×2 matrix A, the eigenvalues λ are
       found by solving the characteristic equation:
@@ -250,39 +280,107 @@
       <li>
         If one of the eigenvalues has magnitude 1, there is no stretching in
         that direction, and the scrambling is weak or non-existent. Examples of
-        these could be matrices that shear,rotate, or flip an image.
+        these could be matrices that reflect, rotate, or shear an image.
       </li>
     </ul>
-    <p>
-      For the classic matrix \(A = \begin{pmatrix} 1 & 1 \\ 1 & 0
-      \end{pmatrix}\), the eigenvalues are \( \frac{1 \pm \sqrt{5}}{2} \)
-      approximately <em>1.618</em> and <em>−0.618</em>. These are the golden
-      ratio and its conjugate. One is greater than 1, one is less than 1 in
-      absolute value, which is exactly what produces the strong chaotic
-      scrambling the Cat Map is known for.
-    </p>
-  </div>
 
-  <div class="about-section">
-    <h2>Why does it always come back?</h2>
     <p>
-      Here's the surprising part. No matter what image you start with, and no
-      matter what matrix you choose, the image always returns to its exact
-      original state after enough steps. Always.
+      Using the examples of a reflection, rotation, and shear we can show that
+      each of these don't produce very good encryption results when used as we
+      do with CAT maps. We apply the matrix then mod by N.
     </p>
+    <h2>Reflect</h2>
     <p>
-      The reason is that the image is a finite grid, for example 15×15 = 225
-      pixels. Each pixel can only be in one of 225 positions. So there are only
-      a limited number of ways to arrange them. Eventually the map has to repeat
-      itself, and because it follows a strict rule (where the determinant is
-      +/−1), it must come back to the very beginning.
+      The matrix, \( \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \), reflects
+      across the line y = x. The eigenvalues are \( \lambda = 1\) and \( \lambda
+      = -1\). The image is clearly not scrambled.
     </p>
+    <div class="hta-canvases" style="margin: 1.5rem 0.5rem">
+      <div class="hta-col">
+        <div class="lbl">Original</div>
+
+        <canvas id="about-ref-0" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">1 reflection</div>
+
+        <canvas id="about-ref-1" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">2 reflections</div>
+
+        <canvas id="about-ref-2" width="280" height="280"></canvas>
+      </div>
+    </div>
+    <h2>Rotation</h2>
     <p>
-      The number of steps it takes to come back is called the
-      <em>period</em>. For the classic Cat Map on a 15×15 grid, the period is
-      40. On a 16×16 grid it is only 24. The period can vary wildly depending on
-      the grid size, some sizes take hundreds of steps to return.
+      The matrix, \( \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \), rotates
+      by 90° around the origin. The eigenvalues are the complex number \(
+      \lambda = i\) and \( \lambda = -i\). There is no stretching or compressing
+      and image is not really encrypted.
     </p>
+    <div class="hta-canvases" style="margin: 1.5rem 0.5rem">
+      <div class="hta-col">
+        <div class="lbl">Original</div>
+
+        <canvas id="about-rot-0" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">1 rotation (90°)</div>
+
+        <canvas id="about-rot-1" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">2 rotations (180°)</div>
+
+        <canvas id="about-rot-2" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">3 rotations (270°)</div>
+
+        <canvas id="about-rot-3" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">4 rotations (360°)</div>
+
+        <canvas id="about-rot-4" width="280" height="280"></canvas>
+      </div>
+    </div>
+    <h2>Shear Map</h2>
+    <p>
+      This matrix, \( \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} \), has a
+      repeated eigenvalue of \( \lambda = 1 \). It shears horizontally and
+      weakly mixes, the image still appears relatively discernable.
+    </p>
+    <div class="hta-canvases" style="margin: 1.5rem 0.5rem">
+      <div class="hta-col">
+        <div class="lbl">Original</div>
+        <canvas id="about-shear-0" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">1 Shear</div>
+        <canvas id="about-shear-1" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">2 Shear</div>
+        <canvas id="about-shear-2" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">3 Shear</div>
+
+        <canvas id="about-shear-3" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">4 Shear</div>
+
+        <canvas id="about-shear-4" width="280" height="280"></canvas>
+      </div>
+      <div class="hta-col">
+        <div class="lbl">5 Shear</div>
+
+        <canvas id="about-shear-5" width="280" height="280"></canvas>
+      </div>
+    </div>
   </div>
 
   <div class="about-section">
