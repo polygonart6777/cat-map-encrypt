@@ -1149,6 +1149,14 @@ input[type="number"].matrix-invalid:focus {
   margin: 0 1.25rem 0.5rem;
 }
 
+.contact-profile h1 {
+  font-family: "Cormorant", serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
 .contact-avatar-wrap {
   width: 240px;
   height: 240px;
