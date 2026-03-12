@@ -124,6 +124,13 @@ nav {
   transform: translateY(-7px) rotate(-45deg);
 }
 
+.nav-logo {
+  font-family: "Cormorant", serif;
+  font-size: 2.75rem;
+  color: var(--accent);
+  margin-right: auto;
+}
+
 @media (max-width: 560px) {
   .nav-hamburger {
     display: flex;
@@ -147,13 +154,13 @@ nav {
     text-align: left;
     border-radius: 6px;
   }
-}
 
-.nav-logo {
-  font-family: "Cormorant", serif;
-  font-size: 3rem;
-  color: var(--accent);
-  margin-right: auto;
+  .nav-logo {
+    font-family: "Cormorant", serif;
+    font-size: 2rem;
+    color: var(--accent);
+    margin-right: auto;
+  }
 }
 
 .nav-logo span {
@@ -240,6 +247,16 @@ input[type="number"] {
   color: var(--accent2);
   margin-right: auto;
   line-height: 1.15;
+}
+
+@media (max-width: 560px) {
+  .hero-logo {
+    font-family: "Cormorant", serif;
+    font-size: 2.5rem;
+    color: var(--accent2);
+    margin-right: auto;
+    line-height: 1.15;
+  }
 }
 
 .hero-logo span {
