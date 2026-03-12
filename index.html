@@ -1,6 +1,30 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arnold Cat Map Explorer</title>
+    <meta
+      name="description"
+      content="An interactive site exploring the discrete Arnold Cat Map, a chaotic transformation that illustrates image encryption."
+    />
+
+    <meta property="og:title" content="Arnold Cat Map Explorer" />
+    <meta
+      property="og:description"
+      content="An interactive site exploring the discrete Arnold Cat Map, a chaotic transformation that illustrates image encryption."
+    />
+    <meta property="og:image" content="assets/16by16cat.png" />
+    <meta property="og:url" content="https://dina-buric.com/cat-map-encrypt/" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Arnold Cat Map Explorer" />
+    <meta
+      name="twitter:description"
+      content="An interactive site exploring the discrete Arnold Cat Map, a chaotic transformation that illustrates image encryption."
+    />
+    <meta name="twitter:image" content="assets/16by16cat.png" />
     <link
       rel="icon"
       type="image/png"
@@ -93,10 +117,9 @@
     <div id="app"></div>
     <!-- Scripts — order matters: shared utilities first, then page modules, then nav -->
     <script src="js/shared.js"></script>
-    <script src="js/iterations.js"></script>
+    <!-- <script src="js/iterations.js"></script> -->
     <script src="js/animation.js"></script>
     <script src="js/about.js"></script>
-    <script src="js/hta.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/qrcode.js"></script>
 
@@ -123,8 +146,6 @@
         await loadPage("animation");
         updateSpeedProgress();
         initAnim();
-
-        // await loadPage("step-by-step");
 
         await loadPage("about");
         initAboutDiagram();
