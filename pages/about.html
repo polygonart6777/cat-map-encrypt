@@ -68,7 +68,8 @@
         <em>reflect across the diagonal</em>.
       </li>
       <li>
-        The matrix <em>shears</em> the grid, taking points outside the original
+        The matrix <em>stretches</em> in one direction and
+        <em> compresses </em> in an other, taking points outside the original
         square.
       </li>
       <li>The <em>modulo</em> folds everything back in.</li>
@@ -87,7 +88,7 @@
         <canvas id="about-hta-reflect" width="280" height="280"></canvas>
       </div>
       <div class="hta-col">
-        <div class="lbl">Shear</div>
+        <div class="lbl">Stretch/Compress</div>
         <canvas id="about-hta-linear" width="280" height="280"></canvas>
       </div>
       <div class="hta-col">
@@ -171,7 +172,7 @@
     </p>
     <ul class="about-list">
       <li>
-        det = 1 means the area stays exactly the same — the transformation is
+        det = 1 means the area stays exactly the same, the transformation is
         <em>area-preserving</em>.
       </li>
       <li>
@@ -180,7 +181,7 @@
       </li>
       <li>det = 2 means the area doubles. det = 0.5 means it halves.</li>
       <li>
-        det = 0 means the shape collapses completely — the matrix is not
+        det = 0 means the shape collapses completely. The matrix is not
         invertible and the image cannot be recovered.
       </li>
     </ul>
@@ -207,7 +208,9 @@
       </div>
     </div>
 
-    <p>Try the animating the cat map with the above matrices to see what you get!</p>
+    <p>
+      Try the animating the cat map with the above matrices to see what you get!
+    </p>
     <p>
       For the Arnold Cat Map we need the determinant to be exactly ±1. This
       guarantees that no pixel is lost or duplicated — every pixel moves to
@@ -233,7 +236,7 @@
     </div>
     <p>
       For the Cat Map to produce chaotic scrambling, the eigenvalues need to
-      behave in a specific way:
+      behave in a specific way. If we assume the determinant is +/-1:
     </p>
     <ul class="about-list">
       <li>
@@ -245,13 +248,9 @@
         the compressing direction.
       </li>
       <li>
-        If both eigenvalues are greater than 1, everything expands without
-        bound, no chaos.
-      </li>
-      <li>If both are less than 1, everything collapses, no chaos.</li>
-      <li>
-        If either eigenvalue equals exactly 1, there is no stretching in that
-        direction,the scrambling is weak or non-existent.
+        If one of the eigenvalues has magnitude 1, there is no stretching in
+        that direction, and the scrambling is weak or non-existent. Examples of
+        these could be matrices that shear,rotate, or flip an image.
       </li>
     </ul>
     <p>
