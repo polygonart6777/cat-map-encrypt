@@ -76,12 +76,13 @@ function animOnUpload(input) {
   const file = input.files[0];
   if (!file) return;
   if (typeof umami !== "undefined") {
-    umami.track("Upload Image", { page: "iterations" });
+    umami.track("Upload Image", { page: "animation" });
   }
   animN = Math.min(
     500,
     Math.max(2, parseInt(document.getElementById("anim-size").value) || 16),
   );
+
   const reader = new FileReader();
   reader.onload = (e) => {
     const img = new Image();
@@ -206,23 +207,6 @@ function animStep(dir) {
   animUpdateUI();
 }
 
-function animReset() {
-  animStop();
-  if (!animOrigData) return;
-
-  animCurrentData = new ImageData(
-    new Uint8ClampedArray(animOrigData.data),
-    animN,
-    animN,
-  );
-  animCtx.putImageData(animCurrentData, 0, 0);
-  animIterations = 0;
-  animHistory = [
-    new ImageData(new Uint8ClampedArray(animOrigData.data), animN, animN),
-  ];
-  animUpdateUI();
-}
-
 /* ── Playback ── */
 
 function animToggle() {
@@ -263,16 +247,19 @@ function updateSpeedProgress() {
   fill.classList.toggle("at-limit", currentTimestep === 50);
 }
 
-/* ── UI sync ── */
-
 function animUpdateUI() {
-  document.getElementById("anim-n").textContent = animIterations;
-  document.getElementById("anim-n-lbl").textContent = animIterations;
+  const n = document.getElementById("anim-n");
+  const nLbl = document.getElementById("anim-n-lbl");
+  const desc = document.getElementById("anim-canvas-desc");
+  const progress = document.getElementById("anim-progress");
 
-  document.getElementById("anim-canvas-desc").textContent =
-    "Iteration " + animIterations + (animPeriod ? " of " + animPeriod : "");
-  if (animPeriod) {
-    document.getElementById("anim-progress").style.width =
+  if (n) n.textContent = animIterations;
+  if (nLbl) nLbl.textContent = animIterations;
+  if (desc)
+    desc.textContent =
+      "Iteration " + animIterations + (animPeriod ? " of " + animPeriod : "");
+  if (animPeriod && progress) {
+    progress.style.width =
       ((animIterations % animPeriod) / animPeriod) * 100 + "%";
   }
 }
@@ -305,6 +292,7 @@ function animOnMatrixChange() {
   animStop();
   const { a11, a12, a21, a22 } = animGetMatrix();
   updateMatrixWarning("anim", a11, a12, a21, a22);
+  if (!animOrigData) return;
 
   animCurrentData = new ImageData(
     new Uint8ClampedArray(animOrigData.data),
@@ -321,4 +309,42 @@ function animOnMatrixChange() {
     animDetectPeriod();
     animUpdateUI();
   }
+}
+
+function animReset() {
+  animStop();
+
+  // Reset matrix inputs to defaults
+  const defaults = { aa11: 1, aa12: 1, aa21: 1, aa22: 0 };
+  for (const [id, val] of Object.entries(defaults)) {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  }
+  updateMatrixWarning("anim", 1, 1, 1, 0);
+
+  // Reset size input
+  animN = 16;
+  const sizeInput = document.getElementById("anim-size");
+  if (sizeInput) sizeInput.value = "16";
+
+  // Reset upload box label
+  resetUploadBox("anim", "PNG / JPG / GIF");
+  animFilename = null;
+
+  // Reload the default image at the default size
+  animCanvas.width = animN;
+  animCanvas.height = animN;
+  makeDefaultImage(animN).then((d) => {
+    animOrigData = d;
+    animCurrentData = new ImageData(
+      new Uint8ClampedArray(d.data),
+      animN,
+      animN,
+    );
+    animIterations = 0;
+    animHistory = [new ImageData(new Uint8ClampedArray(d.data), animN, animN)];
+    animCtx.putImageData(d, 0, 0);
+    animDetectPeriod();
+    animUpdateUI();
+  });
 }

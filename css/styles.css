@@ -1197,21 +1197,13 @@ input[type="number"].matrix-invalid:focus {
 .MJX-TEX,
 mjx-container {
   max-width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
 }
 
 mjx-container[display="true"] {
-  overflow-x: auto;
+  overflow-x: hidden;
   padding: 0.5rem 0;
-}
-
-.math-scroll {
-  overflow-x: auto;
-  overflow-y: hidden;
-  max-width: 100%;
-  padding: 0.5rem 0;
-  -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 560px) {
