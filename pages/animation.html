@@ -36,9 +36,10 @@
               <p id="anim-upload-sub">PNG / JPG / GIF</p>
               <input
                 type="file"
-                id="anim-file"
+                id="anim-upload-input"
                 accept="image/*"
                 onchange="animOnUpload(this)"
+                onclick="this.value = null"
               />
             </label>
           </div>

@@ -74,6 +74,7 @@ function animOnSizeChange() {
 
 function animOnUpload(input) {
   const file = input.files[0];
+  console.log(file);
   if (!file) return;
   if (typeof umami !== "undefined") {
     umami.track("Upload Image", { page: "animation" });
