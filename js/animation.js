@@ -74,11 +74,18 @@ function animOnSizeChange() {
 
 function animOnUpload(input) {
   const file = input.files[0];
-  console.log(file);
   if (!file) return;
+
+  // Always stop and reset state before loading new image
+  animStop();
+  animIterations = 0;
+  animHistory = [];
+  animCurrentData = null;
+
   if (typeof umami !== "undefined") {
     umami.track("Upload Image", { page: "animation" });
   }
+
   animN = Math.min(
     500,
     Math.max(2, parseInt(document.getElementById("anim-size").value) || 16),
@@ -115,6 +122,8 @@ function animOnUpload(input) {
       animFilename = file.name;
       animUpdateUI();
       markUploaded("anim", file.name);
+
+      input.value = "";
     };
     img.src = e.target.result;
   };
