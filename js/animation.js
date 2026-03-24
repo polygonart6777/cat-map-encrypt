@@ -284,7 +284,7 @@ function animSaveFrame() {
     ? animFilename.replace(/\.[^.]+$/, "")
     : "arnold-cat-map";
   const link = document.createElement("a");
-  link.download = `${name}-n-${animIterations}.png`;
+  link.download = `${name}-n-${animN}.png`;
   link.href = animCanvas.toDataURL("image/png");
   link.click();
   const btn = document.querySelector(".canvas-download");
