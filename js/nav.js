@@ -13,8 +13,6 @@ function showPage(id, btn) {
     .forEach((b) => b.classList.remove("active"));
   document.getElementById("page-" + id).classList.add("active");
   btn.classList.add("active");
-  if (id === "hta" && !htaInited) initHTA();
-
   trackPage(id);
   closeNav();
 }
@@ -36,11 +34,18 @@ function closeNav() {
 }
 
 function trackPage(id) {
-  if (typeof umami === "undefined") return;
+  if (typeof umami === "undefined") {
+    setTimeout(() => trackPage(id), 100);
+    return;
+  }
   const names = {
     animation: "Animation",
     about: "About",
     qrcode: "QR Code",
   };
-  umami.track({ url: "/" + id, title: names[id] });
+  umami.track({
+    url: "/" + id,
+    title: names[id],
+    website: "3da82827-4c47-4d6d-8820-0413198c1312",
+  });
 }

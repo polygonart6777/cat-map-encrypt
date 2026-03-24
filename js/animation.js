@@ -139,7 +139,7 @@ function animDetectPeriod() {
   animPeriod = null;
   const orig = animOrigData.data;
   let cur = new ImageData(new Uint8ClampedArray(orig), animN, animN);
-  const limit = 1500;
+  const limit = 1700;
 
   for (let i = 1; i <= limit; i++) {
     cur = applyArnoldTransform(cur, a11, a12, a21, a22);

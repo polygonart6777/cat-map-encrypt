@@ -30,8 +30,7 @@ function getCtx(id) {
 function drawPoint(ctx, cx, cy, idx, origX, size = 12) {
   const half = size / 2;
   const t = origX / (HTA_N - 1); // 0 at x=0, 1 at x=HTA_N-1
-  k = 0.6;
-  const alpha = 1.6 * Math.exp((-1.1 * origX) / (HTA_N - 1));
+  const alpha = 2 * Math.exp((-1.1 * origX) / (HTA_N - 1));
   ctx.globalAlpha = alpha;
   ctx.fillStyle = htaColor(idx);
   ctx.fillRect(cx - half, cy - half, size, size);

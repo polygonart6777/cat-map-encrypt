@@ -61,6 +61,19 @@
   </div>
   <div class="about-section">
     <h2>How the transform works</h2>
+
+    <p>
+      The Cat Map takes every single pixel square and moves it to a new position
+      according to a mathematical rule. This formula describes where each pixel
+      at position (x, y) moves to.
+    </p>
+    <div class="formula-pill formula-pill-break" style="margin: 1.5rem 0">
+      <div class="math-scroll">
+        \( \begin{pmatrix} x_{\text{new}} \\ y_{\text{new}} \end{pmatrix} =
+        \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} x \\ y
+        \end{pmatrix} \mod 16 \)
+      </div>
+    </div>
     <p>Each step of the Cat Map happens in two or three stages:</p>
     <ul class="about-list">
       <li>
@@ -100,15 +113,15 @@
   <div class="about-section">
     <h2>So what does it actually do?</h2>
     <p>
-      The Cat Map takes every single pixel square and moves it to a new position
+      The CAT Map takes every single pixel square and moves it to a new position
       according to a mathematical rule. This formula describes where each pixel
       at position (x, y) moves to.
     </p>
     <div class="formula-pill formula-pill-break" style="margin: 1.5rem 0">
       <div class="math-scroll">
-        \( \begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} a_{11} &
-        a_{12} \\ a_{21} & a_{22} \end{pmatrix} \begin{pmatrix} x \\ y
-        \end{pmatrix} \mod N \)
+        \( \begin{pmatrix} x_{\text{new}} \\ y_{\text{new}} \end{pmatrix} =
+        \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}
+        \begin{pmatrix} x \\ y \end{pmatrix} \mod N \)
       </div>
       <div class="math-scroll">
         \( = \begin{pmatrix} a_{11} x + a_{12} y \mod N \\ a_{21} x + a_{22} y
