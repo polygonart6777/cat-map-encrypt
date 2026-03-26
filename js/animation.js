@@ -358,3 +358,10 @@ function animReset() {
     animUpdateUI();
   });
 }
+
+function togglePanel(header) {
+  const isNowCollapsed = header.classList.toggle("collapsed");
+  header.setAttribute("aria-expanded", String(!isNowCollapsed));
+  const body = header.nextElementSibling;
+  body.classList.toggle("collapsed", isNowCollapsed);
+}

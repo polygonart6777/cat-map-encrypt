@@ -1211,3 +1211,43 @@ mjx-container[display="true"] {
     font-size: 85% !important;
   }
 }
+
+/* ── Collapsible panels ─────────────────────────────────────────── */
+
+.panel-head {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.panel-chevron {
+  margin-left: auto;
+  font-size: 2rem;
+  line-height: 0;
+  transition: transform 0.25s ease;
+  display: inline-block;
+  opacity: 0.6;
+}
+
+.panel-head.collapsed .panel-chevron {
+  transform: rotate(-90deg);
+}
+
+.panel-body {
+  overflow: hidden;
+  max-height: 800px;
+  transition:
+    max-height 0.3s ease,
+    padding 0.3s ease,
+    opacity 0.25s ease;
+  opacity: 1;
+}
+
+.panel-body.collapsed {
+  max-height: 0;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  opacity: 0;
+}

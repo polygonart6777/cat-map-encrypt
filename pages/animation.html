@@ -13,8 +13,20 @@
     <div class="anim-layout">
       <div class="anim-sidebar">
         <div class="panel">
-          <div class="panel-head"><span class="dot"></span>Image</div>
-          <div class="sidebar-body">
+          <div
+            class="panel-head"
+            onclick="togglePanel(this)"
+            aria-expanded="true"
+            role="button"
+            tabindex="0"
+            onkeydown="
+              if (event.key === 'Enter' || event.key === ' ') togglePanel(this);
+            "
+          >
+            <span class="dot"></span>Image
+            <span class="panel-chevron">&#8964;</span>
+          </div>
+          <div class="sidebar-body panel-body">
             <div>
               <label class="field-label">Pixel Size (max 500)</label>
               <input
@@ -88,10 +100,20 @@
       </div>
       <div class="anim-sidebar">
         <div class="panel">
-          <div class="panel-head">
+          <div
+            class="panel-head"
+            onclick="togglePanel(this)"
+            aria-expanded="true"
+            role="button"
+            tabindex="0"
+            onkeydown="
+              if (event.key === 'Enter' || event.key === ' ') togglePanel(this);
+            "
+          >
             <span class="dot dot-purple"></span>Playback
+            <span class="panel-chevron">&#8964;</span>
           </div>
-          <div class="sidebar-body">
+          <div class="sidebar-body panel-body">
             <div class="speed-stepper">
               <label class="field-label" style="font-size: 1rem">Speed: </label>
 
