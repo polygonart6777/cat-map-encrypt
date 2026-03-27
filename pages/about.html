@@ -65,13 +65,13 @@
     <p>
       The Cat Map takes every single pixel square and moves it to a new position
       according to a mathematical rule. This formula describes where each pixel
-      at position (x, y) moves to.
+      at position (x, y) moves to, described step by step in the images below.
     </p>
     <div class="formula-pill formula-pill-break" style="margin: 1.5rem 0">
       <div class="math-scroll">
         \( \begin{pmatrix} x_{\text{new}} \\ y_{\text{new}} \end{pmatrix} =
         \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} x \\ y
-        \end{pmatrix} \mod 16 \)
+        \end{pmatrix} \mod 10 \)
       </div>
     </div>
     <p>Each step of the Cat Map happens in two or three stages:</p>
